@@ -103,8 +103,19 @@ a:hover {
   letter-spacing: -0.04em;
 }
 
-.airbnb-logo-wrap i {
-  font-size: 2rem;
+.airbnb-logo-mark {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  position: relative;
+  flex: 0 0 40px;
+  border-radius: 9px;
+}
+
+.airbnb-logo-mark img {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 /* Airbnb Expanded Search Capsule */
@@ -744,6 +755,23 @@ a:hover {
   background: transparent;
   font-family: inherit;
   padding: 0;
+}
+
+.was-validated .segmented-input-row:has(input:invalid),
+.was-validated .segmented-input-row:has(textarea:invalid) {
+  background-color: #fff5f5;
+  border-left: 3px solid #dc3545;
+}
+
+.was-validated .segmented-input-row:has(input:invalid) label,
+.was-validated .segmented-input-row:has(textarea:invalid) label {
+  color: #dc3545;
+}
+
+.segmented-input-row .invalid-feedback {
+  font-size: 0.76rem;
+  margin-top: 3px;
+  font-weight: 500;
 }
 
 .airbnb-primary-btn {

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img">
+  <title>YelpCamp</title>
+  <rect width="200" height="200" rx="44" fill="#D62B2B"/>
+  <circle cx="100" cy="50" r="34" fill="#F7C948"/>
+  <path d="M0 170 60 90l40 60 30-50 70 70Z" fill="#FFF"/>
+  <path d="m60 90 20 30-40 50h60Z" fill="#F1D9D9" opacity=".6"/>
+  <path d="m130 100 20 35-50 35h100Z" fill="#F1D9D9" opacity=".4"/>
+</svg>

@@ -144,6 +144,30 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
+app.get("/help", (req, res) => {
+  res.render("pages/help");
+});
+
+app.get("/aircover", (req, res) => {
+  res.render("pages/aircover");
+});
+
+app.get("/about", (req, res) => {
+  res.render("pages/about");
+});
+
+app.get("/privacy", (req, res) => {
+  res.render("pages/privacy");
+});
+
+app.get("/terms", (req, res) => {
+  res.render("pages/terms");
+});
+
+app.get("/hosting", (req, res) => {
+  res.render("pages/hosting");
+});
+
 app.all(/(.*)/, (req, res, next) => {
   next(new expressError("Page Not Found", 404));
 });

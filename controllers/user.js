@@ -6,7 +6,15 @@ module.exports.renderRegister = (req, res) => {
 
 module.exports.register = async (req, res, next) => {
   try {
-    const { email, username, password } = req.body;
+    const { email, username, password, confirmPassword } = req.body;
+    if (!email || !username || !password || !confirmPassword) {
+      req.flash("error", "All fields are required!");
+      return res.redirect("/register");
+    }
+    if (password !== confirmPassword) {
+      req.flash("error", "Passwords do not match!");
+      return res.redirect("/register");
+    }
     const user = new User({ email, username });
     const registeredUser = await User.register(user, password);
     req.login(registeredUser, (err) => {
@@ -16,7 +24,7 @@ module.exports.register = async (req, res, next) => {
     });
   } catch (e) {
     req.flash("error", e.message);
-    return res.redirect("register");
+    return res.redirect("/register");
   }
 };
 

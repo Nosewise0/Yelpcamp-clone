@@ -18,10 +18,12 @@
           <div class="segmented-input-row">
             <label for="username">Username</label>
             <input id="username" name="username" type="text" placeholder="Choose a username" required autofocus>
+            <div class="invalid-feedback">Username is required.</div>
           </div>
           <div class="segmented-input-row">
             <label for="email">Email</label>
             <input id="email" name="email" type="email" placeholder="name@example.com" required>
+            <div class="invalid-feedback">A valid email address is required.</div>
           </div>
           <div class="segmented-input-row position-relative">
             <label for="password">Password</label>
@@ -29,6 +31,15 @@
               <input id="password" name="password" type="password" minlength="6" placeholder="Min. 6 characters" required>
               <button id="togglePwd" type="button" class="btn btn-sm btn-link text-dark text-decoration-none fw-bold p-0 ms-2" aria-label="Toggle password">Show</button>
             </div>
+            <div class="invalid-feedback">Password is required (minimum 6 characters).</div>
+          </div>
+          <div class="segmented-input-row position-relative">
+            <label for="confirmPassword">Confirm Password</label>
+            <div class="d-flex align-items-center">
+              <input id="confirmPassword" name="confirmPassword" type="password" minlength="6" placeholder="Re-enter password" required>
+              <button id="toggleConfirmPwd" type="button" class="btn btn-sm btn-link text-dark text-decoration-none fw-bold p-0 ms-2" aria-label="Toggle confirm password">Show</button>
+            </div>
+            <div class="invalid-feedback">Please confirm your password.</div>
           </div>
         </div>
 

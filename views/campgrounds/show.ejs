@@ -16,9 +16,10 @@
         <span class="text-decoration-underline fw-semibold"><%= campground.location %></span>
       </div>
       
-      <div class="d-flex gap-3">
-        <button class="btn btn-sm btn-link text-dark text-decoration-none fw-semibold p-0"><i class="bi bi-upload me-1"></i> Share</button>
-        <button class="btn btn-sm btn-link text-dark text-decoration-none fw-semibold p-0"><i class="bi bi-heart me-1"></i> Save</button>
+      <div>
+        <button class="btn btn-sm btn-link text-dark text-decoration-none fw-semibold p-0" id="shareListingBtn">
+          <i class="bi bi-upload me-1"></i> Share
+        </button>
       </div>
     </div>
   </div>
@@ -96,7 +97,7 @@
       </div>
 
       <!-- What this place offers (Amenities) -->
-      <div class="pb-4 border-bottom border-light mb-4">
+      <!-- <div class="pb-4 border-bottom border-light mb-4">
         <h4 class="h5 fw-bold mb-4">What this place offers</h4>
         <div class="airbnb-amenity-grid">
           <div class="airbnb-amenity-row"><i class="bi bi-tree"></i> Mountain & forest view</div>
@@ -106,7 +107,7 @@
           <div class="airbnb-amenity-row"><i class="bi bi-heart"></i> Pets allowed</div>
           <div class="airbnb-amenity-row"><i class="bi bi-cup-hot"></i> Potable drinking water</div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Where you'll be (Location Map Section) -->
       <div class="pb-4 border-bottom border-light mb-4">
@@ -141,7 +142,7 @@
         </h3>
 
         <!-- Category Ratings Breakdown -->
-        <div class="airbnb-review-category-grid">
+        <!-- <div class="airbnb-review-category-grid">
           <div class="airbnb-rating-bar-container">
             <span>Cleanliness</span>
             <div class="airbnb-progress-bar"><div class="airbnb-progress-fill" style="width: 98%;"></div></div>
@@ -172,7 +173,7 @@
             <div class="airbnb-progress-bar"><div class="airbnb-progress-fill" style="width: 94%;"></div></div>
             <span class="fw-bold small">4.7</span>
           </div>
-        </div>
+        </div> -->
 
         <!-- Reviews List -->
         <% if (campground.reviews.length === 0) { %>
@@ -310,9 +311,45 @@
   </div>
 </div>
 
+<!-- Toast Notification for Share -->
+<div class="position-fixed bottom-0 start-50 translate-middle-x p-3" style="z-index: 1100">
+  <div id="detailsToast" class="toast align-items-center text-bg-dark border-0 rounded-pill shadow-lg" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex px-3 py-2 align-items-center">
+      <i class="bi bi-check-circle-fill text-success me-2 fs-5" id="detailsToastIcon"></i>
+      <div class="toast-body p-0 fw-semibold small" id="detailsToastMessage">
+        Link copied to clipboard
+      </div>
+    </div>
+  </div>
+</div>
+
 <%- "<script>" %>
   const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
   const campground = <%- JSON.stringify(campground) %>;
 <%- "</script>" %>
 
 <script src="/javascripts/showPageMap.js"></script>
+
+<!-- Share Script for Details Page -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const shareBtn = document.getElementById('shareListingBtn');
+    const toastEl = document.getElementById('detailsToast');
+    const toastMsg = document.getElementById('detailsToastMessage');
+
+    if (shareBtn) {
+      shareBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(window.location.href).then(() => {
+            if (toastEl && typeof bootstrap !== 'undefined') {
+              toastMsg.textContent = 'Link copied to clipboard';
+              const toast = new bootstrap.Toast(toastEl, { delay: 2000 });
+              toast.show();
+            }
+          });
+        }
+      });
+    }
+  });
+</script>

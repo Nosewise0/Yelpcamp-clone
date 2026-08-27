@@ -1,0 +1,126 @@
+<% layout('layout/boilerplate') %>
+
+<div class="container-xl py-5">
+  <!-- Help Center Hero -->
+  <div class="text-center py-4 mb-5">
+    <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3 py-1 fw-bold text-uppercase mb-3" style="font-size: 0.75rem;">
+      Support
+    </span>
+    <h1 class="display-5 fw-bold mb-3">Hi, how can we help?</h1>
+    <p class="lead text-secondary mx-auto" style="max-width: 600px;">
+      Find answers to your questions about bookings, cancellations, host guidelines, and account settings.
+    </p>
+
+    <!-- Help Search Bar -->
+    <div class="mx-auto mt-4" style="max-width: 540px;">
+      <div class="input-group input-group-lg rounded-pill border shadow-sm overflow-hidden bg-white">
+        <span class="input-group-text bg-white border-0 ps-4 text-secondary"><i class="bi bi-search"></i></span>
+        <input type="text" class="form-control border-0 py-3 shadow-none fs-6" placeholder="Search how-tos, policies, and more...">
+      </div>
+    </div>
+  </div>
+
+  <!-- Help Category Cards -->
+  <div class="row g-4 mb-5">
+    <div class="col-md-4">
+      <div class="card h-100 border rounded-4 p-4 shadow-sm hover-shadow transition">
+        <i class="bi bi-calendar-check text-danger fs-2 mb-3"></i>
+        <h5 class="fw-bold mb-2">Booking & Cancellations</h5>
+        <p class="text-secondary small mb-3">Learn how reservations, 48-hour free cancellation, and refund timelines work.</p>
+        <a href="#booking" class="text-dark fw-bold small text-decoration-underline mt-auto">Read booking guide</a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 border rounded-4 p-4 shadow-sm hover-shadow transition">
+        <i class="bi bi-shield-check text-danger fs-2 mb-3"></i>
+        <h5 class="fw-bold mb-2">AirCover Protection</h5>
+        <p class="text-secondary small mb-3">Comprehensive protection for all bookings against host cancellations and issues.</p>
+        <a href="/aircover" class="text-dark fw-bold small text-decoration-underline mt-auto">Learn about AirCover</a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100 border rounded-4 p-4 shadow-sm hover-shadow transition">
+        <i class="bi bi-house-door text-danger fs-2 mb-3"></i>
+        <h5 class="fw-bold mb-2">Hosting Campsites</h5>
+        <p class="text-secondary small mb-3">Everything you need to know about listing your land, managing photos, and payouts.</p>
+        <a href="/hosting" class="text-dark fw-bold small text-decoration-underline mt-auto">Host resources</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQs Accordion -->
+  <div class="mx-auto my-5" style="max-width: 800px;">
+    <h3 class="fw-bold mb-4 text-center">Frequently Asked Questions</h3>
+    
+    <div class="accordion accordion-flush border rounded-3 overflow-hidden shadow-sm" id="helpFaqAccordion">
+      <!-- FAQ 1 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faqHeading1">
+          <button class="accordion-button fw-semibold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1">
+            How do I add a new campground or campsite?
+          </button>
+        </h2>
+        <div id="faqCollapse1" class="accordion-collapse collapse show" data-bs-parent="#helpFaqAccordion">
+          <div class="accordion-body text-secondary small lh-lg">
+            You can add your own spot anytime! Simply log into your account and click on <strong>"YelpCamp your campsite"</strong> in the top navigation header. Fill in the campground title, address or national park name, nightly rate, and upload your high-resolution photos.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faqHeading2">
+          <button class="accordion-button collapsed fw-semibold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2">
+            What is the cancellation and refund policy?
+          </button>
+        </h2>
+        <div id="faqCollapse2" class="accordion-collapse collapse" data-bs-parent="#helpFaqAccordion">
+          <div class="accordion-body text-secondary small lh-lg">
+            Campgrounds offer free cancellation for up to 48 hours after booking. If you cancel at least 5 days before your scheduled check-in, you will receive a 100% full refund including service fees.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faqHeading3">
+          <button class="accordion-button collapsed fw-semibold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3">
+            How do cluster maps work?
+          </button>
+        </h2>
+        <div id="faqCollapse3" class="accordion-collapse collapse" data-bs-parent="#helpFaqAccordion">
+          <div class="accordion-body text-secondary small lh-lg">
+            Our interactive cluster maps use MapTiler geospatial clustering. When zoomed out, nearby campsites group into numeric cluster pins. Clicking on a cluster automatically zooms into that region to reveal individual campsite pins.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 4 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="faqHeading4">
+          <button class="accordion-button collapsed fw-semibold py-3" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4">
+            How can I leave a review for a campground?
+          </button>
+        </h2>
+        <div id="faqCollapse4" class="accordion-collapse collapse" data-bs-parent="#helpFaqAccordion">
+          <div class="accordion-body text-secondary small lh-lg">
+            Navigate to any campground details page while signed in. Scroll down to the review section to select your 1 to 5 star rating and write feedback about your stay.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Banner -->
+  <div class="card border rounded-4 p-5 text-center bg-light mt-5">
+    <h4 class="fw-bold mb-2">Still have questions?</h4>
+    <p class="text-secondary small mb-4">Our support team and camping community are here 24/7 to assist you.</p>
+    <div>
+      <a href="mailto:support@yelpcamp.com" class="airbnb-primary-btn">
+        <i class="bi bi-envelope-fill me-2"></i> Contact Support
+      </a>
+    </div>
+  </div>
+</div>

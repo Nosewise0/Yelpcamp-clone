@@ -1,0 +1,15 @@
+<svg viewBox="0 0 200 200" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>YelpCamp</title>
+  <defs>
+    <clipPath id="badgeClip">
+      <rect width="200" height="200" rx="44" />
+    </clipPath>
+  </defs>
+  <rect width="200" height="200" rx="44" fill="#D62B2B" />
+  <g clip-path="url(#badgeClip)">
+    <circle cx="100" cy="50" r="34" fill="#F7C948" />
+    <path d="M0 170 L60 90 L100 150 L130 100 L200 170 Z" fill="#FFFFFF" />
+    <path d="M60 90 L80 120 L40 170 L100 170 Z" fill="#F1D9D9" opacity="0.6" />
+    <path d="M130 100 L150 135 L100 170 L200 170 Z" fill="#F1D9D9" opacity="0.4" />
+  </g>
+</svg>
