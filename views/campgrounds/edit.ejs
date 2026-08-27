@@ -50,9 +50,22 @@
           <label class="d-block text-center p-3 border rounded-3 bg-light cursor-pointer" for="image" style="cursor: pointer;">
             <i class="bi bi-cloud-arrow-up fs-3 text-secondary d-block mb-1"></i>
             <strong class="d-block text-dark small">Choose new images</strong>
-            <span class="small text-muted">Upload high-res photos to refresh your listing</span>
+            <span class="small text-muted" id="editUploadPromptText">Upload high-res photos to refresh your listing</span>
             <input type="file" class="d-none" id="image" name="image" multiple accept="image/*">
           </label>
+
+          <!-- Live Image Preview for Newly Selected Photos -->
+          <div id="imagePreviewContainer" class="d-none mt-3">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+              <span class="small fw-bold text-dark" id="previewCountText">0 new photos selected</span>
+              <button type="button" class="btn btn-sm btn-link text-danger text-decoration-none fw-bold p-0" id="clearSelectedImagesBtn">
+                Clear selection
+              </button>
+            </div>
+            <div class="row g-2" id="previewGalleryGrid">
+              <!-- Rendered preview thumbnails will appear here -->
+            </div>
+          </div>
         </div>
 
         <!-- Existing Photos Management -->
@@ -90,3 +103,66 @@
     </div>
   </div>
 </div>
+
+<!-- Image Preview Script for Edit Form -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const imageInput = document.getElementById('image');
+    const previewContainer = document.getElementById('imagePreviewContainer');
+    const previewGalleryGrid = document.getElementById('previewGalleryGrid');
+    const previewCountText = document.getElementById('previewCountText');
+    const clearBtn = document.getElementById('clearSelectedImagesBtn');
+    const uploadPromptText = document.getElementById('editUploadPromptText');
+
+    if (imageInput) {
+      imageInput.addEventListener('change', function(e) {
+        const files = Array.from(e.target.files);
+        previewGalleryGrid.innerHTML = '';
+
+        if (files && files.length > 0) {
+          previewContainer.classList.remove('d-none');
+          previewCountText.textContent = `${files.length} new photo${files.length > 1 ? 's' : ''} selected`;
+          if (uploadPromptText) {
+            uploadPromptText.textContent = `${files.length} file${files.length > 1 ? 's' : ''} ready to add (click to replace)`;
+          }
+
+          files.forEach((file) => {
+            if (file.type.startsWith('image/')) {
+              const col = document.createElement('div');
+              col.className = 'col-4 position-relative';
+
+              const card = document.createElement('div');
+              card.className = 'card border rounded-2 overflow-hidden shadow-sm position-relative';
+              card.style.height = '90px';
+
+              const img = document.createElement('img');
+              img.src = URL.createObjectURL(file);
+              img.className = 'w-100 h-100 object-fit-cover';
+              img.alt = file.name;
+
+              card.appendChild(img);
+              col.appendChild(card);
+              previewGalleryGrid.appendChild(col);
+            }
+          });
+        } else {
+          previewContainer.classList.add('d-none');
+          if (uploadPromptText) {
+            uploadPromptText.textContent = 'Upload high-res photos to refresh your listing';
+          }
+        }
+      });
+    }
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function() {
+        if (imageInput) imageInput.value = '';
+        previewGalleryGrid.innerHTML = '';
+        previewContainer.classList.add('d-none');
+        if (uploadPromptText) {
+          uploadPromptText.textContent = 'Upload high-res photos to refresh your listing';
+        }
+      });
+    }
+  });
+</script>

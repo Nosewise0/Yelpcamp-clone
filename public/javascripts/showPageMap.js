@@ -7,6 +7,10 @@ const map = new maptilersdk.Map({
   zoom: 11,
 });
 
+map.on('load', function() {
+  map.resize();
+});
+
 new maptilersdk.Marker({ color: "#FF385C" })
   .setLngLat(campground.geometry.coordinates)
   .setPopup(

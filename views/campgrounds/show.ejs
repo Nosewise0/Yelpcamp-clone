@@ -44,7 +44,7 @@
   </div>
 
   <div class="row g-5">
-    <!-- Left Column: Details, Host, Amenities, Reviews -->
+    <!-- Left Column: Details, Host, Amenities, Map, Reviews -->
     <div class="col-lg-7 col-xl-8">
       <!-- Host Header -->
       <div class="airbnb-host-row">
@@ -105,6 +105,15 @@
           <div class="airbnb-amenity-row"><i class="bi bi-p-circle"></i> Free parking on premises</div>
           <div class="airbnb-amenity-row"><i class="bi bi-heart"></i> Pets allowed</div>
           <div class="airbnb-amenity-row"><i class="bi bi-cup-hot"></i> Potable drinking water</div>
+        </div>
+      </div>
+
+      <!-- Where you'll be (Location Map Section) -->
+      <div class="pb-4 border-bottom border-light mb-4">
+        <h4 class="h5 fw-bold mb-2">Where you'll be</h4>
+        <p class="text-secondary mb-3"><i class="bi bi-geo-alt me-1"></i> <%= campground.location %></p>
+        <div class="rounded-4 overflow-hidden border shadow-sm" style="height: 380px; width: 100%;">
+          <div id="map" style="width: 100%; height: 100%;"></div>
         </div>
       </div>
 
@@ -238,7 +247,7 @@
       </div>
     </div>
 
-    <!-- Right Column: Sticky Airbnb Reservation Card -->
+    <!-- Right Column: Sticky Airbnb Reservation Card ONLY -->
     <div class="col-lg-5 col-xl-4">
       <div class="airbnb-reserve-card">
         <!-- Price Header -->
@@ -296,13 +305,6 @@
             <span>$<%= (campground.price * 5) + 80 %></span>
           </div>
         </div>
-      </div>
-
-      <!-- Map Widget Box -->
-      <div class="card border rounded-3 p-3 mt-4 bg-white shadow-sm">
-        <h6 class="fw-bold mb-2">Where you'll be</h6>
-        <div id="map" style="width: 100%; height: 220px; border-radius: 8px;"></div>
-        <p class="small text-secondary mt-2 mb-0"><i class="bi bi-geo-alt me-1"></i> <%= campground.location %></p>
       </div>
     </div>
   </div>
