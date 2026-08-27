@@ -1,100 +1,52 @@
 <% layout('layout/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/register.css">
 
-  <div class="register-page min-vh-100 d-flex align-items-center justify-content-center py-5">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-sm-10 col-md-8 col-lg-6">
-          <div class="card register-card shadow-lg overflow-hidden rounded-4">
-            <!-- Header -->
-            <div class="card-header header-gradient text-white d-flex align-items-center justify-content-between">
-              <div>
-                <h2 class="mb-0 fw-bold"><i class="bi bi-tent-fill me-2"></i>Join YelpCamp</h2>
-                <small class="opacity-75">Create your account and start sharing campgrounds</small>
-              </div>
-              <a href="/" class="btn btn-sm btn-light text-primary rounded-pill">
-                <i class="bi bi-house-door-fill"></i> Home
-              </a>
-            </div>
+<div class="container-xxl py-4">
+  <div class="airbnb-modal-card">
+    <!-- Header -->
+    <div class="airbnb-modal-header">
+      <h5>Sign up</h5>
+    </div>
 
-            <!-- Body -->
-            <div class="card-body p-4 p-sm-5 bg-white">
-              <form id="registerForm" action="/register" method="POST" novalidate>
-                <!-- Username -->
-                <div class="mb-3">
-                  <label for="username" class="form-label fw-semibold">Username</label>
-                  <div class="input-group input-group-lg">
-                    <span class="input-group-text bg-white border-2"><i
-                        class="bi bi-person-fill text-primary"></i></span>
-                    <input id="username" name="username" type="text" class="form-control border-2 form-control-lg"
-                      placeholder="yourname" required>
-                  </div>
-                  <div class="invalid-feedback">Please choose a username.</div>
-                </div>
+    <!-- Body -->
+    <div class="airbnb-modal-body">
+      <h4 class="fw-bold mb-4">Create your YelpCamp account</h4>
 
-                <!-- Email -->
-                <div class="mb-3">
-                  <label for="email" class="form-label fw-semibold">Email</label>
-                  <div class="input-group input-group-lg">
-                    <span class="input-group-text bg-white border-2"><i
-                        class="bi bi-envelope-fill text-info"></i></span>
-                    <input id="email" name="email" type="email" class="form-control border-2 form-control-lg"
-                      placeholder="you@example.com" required>
-                  </div>
-                  <div class="invalid-feedback">Please enter a valid email address.</div>
-                </div>
-
-                <!-- Password -->
-                <div class="mb-3">
-                  <label for="password" class="form-label fw-semibold">Password</label>
-                  <div class="input-group input-group-lg align-items-center">
-                    <span class="input-group-text bg-white border-2"><i class="bi bi-lock-fill text-danger"></i></span>
-                    <input id="password" name="password" type="password" minlength="8"
-                      class="form-control border-2 form-control-lg" placeholder="At least 8 characters" required
-                      aria-describedby="pwdHelp">
-                    <button id="togglePwd" type="button" class="btn btn-outline-secondary border-2"
-                      aria-label="Toggle password">
-                      <i class="bi bi-eye"></i>
-                    </button>
-                  </div>
-                  <div id="pwdHelp" class="form-text text-muted mt-2">Use a strong password. Strength: <span
-                      id="pwdStrength">—</span></div>
-                  <div class="invalid-feedback">Please provide a password (min 8 characters).</div>
-                </div>
-
-                <!-- Confirm -->
-                <div class="mb-4">
-                  <label for="confirm" class="form-label fw-semibold">Confirm Password</label>
-                  <div class="input-group input-group-lg">
-                    <span class="input-group-text bg-white border-2">
-                      <i class="bi bi-check2-circle text-success"></i>
-                    </span>
-                    <input id="confirm" name="confirm" type="password" class="form-control border-2 form-control-lg"
-                      placeholder="Re-enter password" required />
-                    <div class="invalid-feedback">Passwords must match.</div>
-                  </div>
-                </div>
-
-                <!-- Submit -->
-                <div class="d-grid mb-3">
-                  <button id="submitBtn" class="btn btn-gradient btn-lg rounded-pill fw-bold" type="submit">
-                    <i class="bi bi-person-check-fill me-2"></i>Create Account
-                  </button>
-                </div>
-
-                <div class="text-center">
-                  <small class="text-muted">Already have an account? <a href="/login"
-                      class="fw-semibold text-decoration-none">Login</a></small>
-                </div>
-              </form>
+      <form id="registerForm" action="/register" method="POST" novalidate class="needs-validation">
+        <!-- Segmented Input Box -->
+        <div class="airbnb-segmented-input mb-3">
+          <div class="segmented-input-row">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" placeholder="Choose a username" required autofocus>
+          </div>
+          <div class="segmented-input-row">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="name@example.com" required>
+          </div>
+          <div class="segmented-input-row position-relative">
+            <label for="password">Password</label>
+            <div class="d-flex align-items-center">
+              <input id="password" name="password" type="password" minlength="6" placeholder="Min. 6 characters" required>
+              <button id="togglePwd" type="button" class="btn btn-sm btn-link text-dark text-decoration-none fw-bold p-0 ms-2" aria-label="Toggle password">Show</button>
             </div>
           </div>
-
-          <p class="text-center text-muted mt-4 small">
-            <i class="bi bi-shield-check me-1"></i>Your info is secure.
-          </p>
         </div>
-      </div>
+
+        <p class="text-secondary small mb-4" style="font-size: 0.76rem;">
+          By selecting <strong>Agree and continue</strong>, you agree to YelpCamp's <a href="#" class="text-dark fw-bold text-decoration-underline">Terms of Service</a> and <a href="#" class="text-dark fw-bold text-decoration-underline">Privacy Policy</a>.
+        </p>
+
+        <!-- Submit Button -->
+        <div class="d-grid mb-3">
+          <button id="submitBtn" class="airbnb-primary-btn py-3" type="submit">
+            Agree and continue
+          </button>
+        </div>
+
+        <div class="text-center pt-2">
+          <span class="text-secondary small">Already have an account? <a href="/login" class="text-dark fw-bold text-decoration-underline">Log in</a></span>
+        </div>
+      </form>
     </div>
   </div>
-
-  <script src="/javascripts/confirmMatch.js"></script>
+</div>

@@ -4,26 +4,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YelpCamp — Discover Amazing Campgrounds</title>
-  <meta name="description" content="Find, share, and review campgrounds across the country with the YelpCamp community.">
+  <title>YelpCamp: Vacation Rentals, Cabins, Campgrounds & More</title>
+  <meta name="description" content="Find the perfect campsite, wilderness retreat, or national park camping with YelpCamp.">
+  
+  <!-- Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap 5 & Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  
+  <!-- MapTiler SDK -->
   <script src="https://cdn.maptiler.com/maptiler-sdk-js/v3.6.1/maptiler-sdk.umd.min.js"></script>
   <link href="https://cdn.maptiler.com/maptiler-sdk-js/v3.6.1/maptiler-sdk.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  
+  <!-- Custom Airbnb Design System -->
   <link rel="stylesheet" href="/stylesheets/main.css" />
 </head>
 
 <body>
   <%- include('../partials/navbar') %>
+  
   <main class="site-main">
-    <div class="container">
+    <div class="container-xxl px-3 px-md-4 pt-3">
       <%- include('../partials/flash') %>
       <%- body %>
     </div>
   </main>
+  
   <%- include('../partials/footer') %>
 
+  <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous"></script>
@@ -33,17 +47,6 @@
   <script src="/javascripts/validateForms.js"></script>
   <script src="/javascripts/passwordVisibility.js"></script>
   <script src="/javascripts/passwordToggleStrength.js"></script>
-  <script>
-    var toggler = document.getElementById('navToggler');
-    var navEl = document.getElementById('ycNav');
-    var navRight = document.getElementById('ycNavRight');
-    if (toggler) {
-      toggler.addEventListener('click', function() {
-        if (navEl) navEl.classList.toggle('open');
-        if (navRight) navRight.classList.toggle('open');
-      });
-    }
-  </script>
 </body>
 
 </html>

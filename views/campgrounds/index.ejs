@@ -1,134 +1,248 @@
 <% layout('layout/boilerplate') %>
 
-  <div id="map" style="width: 100%; height: 500px;" class="mb-5"></div>
-
-  <div class="container py-5">
-    <!-- Header Section -->
-    <div class="row mb-5">
-      <div class="col-lg-8">
-        <h1 class="display-4 fw-bold text-primary mb-3">
-          <i class="bi bi-tent-fill"></i> Explore Campgrounds
-        </h1>
-        <p class="lead text-muted">Discover amazing camping spots from our community</p>
-      </div>
-      <div class="col-lg-4 d-flex align-items-center justify-content-lg-end">
-        <a href="/campgrounds/new" class="btn btn-success btn-lg rounded-pill px-4">
-          <i class="bi bi-plus-circle-fill"></i> Add New Campground
-        </a>
-      </div>
+<!-- Airbnb Category Icon Slider -->
+<div class="airbnb-categories-wrapper">
+  <div class="airbnb-categories-scroll px-1">
+    <div class="category-item active" data-category="all">
+      <i class="bi bi-fire"></i>
+      <span>Trending</span>
     </div>
+    <div class="category-item" data-category="national-parks">
+      <i class="bi bi-tree"></i>
+      <span>National Parks</span>
+    </div>
+    <div class="category-item" data-category="cabins">
+      <i class="bi bi-houses"></i>
+      <span>Cabins</span>
+    </div>
+    <div class="category-item" data-category="lakeside">
+      <i class="bi bi-water"></i>
+      <span>Lakefront</span>
+    </div>
+    <div class="category-item" data-category="mountains">
+      <i class="bi bi-triangle"></i>
+      <span>Mountains</span>
+    </div>
+    <div class="category-item" data-category="views">
+      <i class="bi bi-binoculars"></i>
+      <span>Amazing Views</span>
+    </div>
+    <div class="category-item" data-category="offgrid">
+      <i class="bi bi-compass"></i>
+      <span>Off-the-grid</span>
+    </div>
+    <div class="category-item" data-category="beaches">
+      <i class="bi bi-tsunami"></i>
+      <span>Beachfront</span>
+    </div>
+  </div>
+</div>
 
-    <!-- Campgrounds Grid -->
-    <% if (campgrounds.length===0) { %>
-      <div class="alert alert-info rounded-4 text-center py-5" role="alert">
-        <i class="bi bi-info-circle-fill display-6"></i>
-        <h4 class="mt-3">No campgrounds yet!</h4>
-        <p class="mb-3">Be the first to create one.</p>
-        <a href="/campgrounds/new" class="btn btn-primary rounded-pill">
-          <i class="bi bi-plus-circle-fill"></i> Create Campground
-        </a>
-      </div>
-      <% } else { %>
-        <div class="row g-4">
-          <% for (let campground of campgrounds) { %>
-            <div class="col-xl-4 col-lg-6 col-md-12">
-              <div class="card border-0 shadow-lg rounded-4 h-100 overflow-hidden transition-all"
-                style="cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-
-                <!-- Image Section -->
-                <div class="position-relative overflow-hidden" style="height: 250px;">
-                  <% if (campground.image && campground.image.length> 0) { %>
-                    <img src="<%= campground.image[0].url %>" alt="<%= campground.title %>"
-                      class="card-img-top h-100 w-100" style="object-fit: cover; transition: transform 0.3s ease;">
-                    <% } else { %>
-                      <img src="https://via.placeholder.com/400x300?text=No+Image" alt="No Image"
-                        class="card-img-top h-100 w-100" style="object-fit: cover;">
-                      <% } %>
-
-                        <!-- Price Badge -->
-                        <div class="position-absolute top-0 end-0 m-3">
-                          <span class="badge bg-success rounded-pill px-3 py-2 fs-6">
-                            <i class="bi bi-cash-coin"></i> $<%= campground.price %>/night
-                          </span>
-                        </div>
-
-                        <!-- Image Count Badge -->
-                        <% if (campground.image && campground.image.length> 1) { %>
-                          <div class="position-absolute bottom-0 end-0 m-3">
-                            <span class="badge bg-dark rounded-pill px-3 py-2">
-                              <i class="bi bi-images"></i>
-                              <%= campground.image.length %> photos
-                            </span>
-                          </div>
-                          <% } %>
-                </div>
-
-                <!-- Card Content -->
-                <div class="card-body p-4 d-flex flex-column">
-                  <h5 class="card-title fw-bold mb-2 text-primary">
-                    <%= campground.title %>
-                  </h5>
-
-                  <p class="card-text text-muted mb-3"
-                    style="display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; -webkit-line-clamp: 2; line-clamp: 2;">
-                    <%= campground.description %>
-                  </p>
-
-                  <!-- Location -->
-                  <p class="mb-4">
-                    <i class="bi bi-geo-alt-fill text-danger"></i>
-                    <small class="text-muted">
-                      <%= campground.location %>
-                    </small>
-                  </p>
-
-                  <!-- View Button -->
-                  <a class="btn btn-primary rounded-pill w-100 fw-bold mt-auto"
-                    href="/campgrounds/<%= campground._id %>">
-                    <i class="bi bi-eye-fill"></i> View Details
-                  </a>
-                </div>
-              </div>
-            </div>
-            <% } %>
-        </div>
-        <% } %>
+<!-- Inline Quick Search & Price Filter Bar -->
+<div class="d-flex align-items-center justify-content-between flex-wrap gap-3 my-4">
+  <div class="d-flex align-items-center gap-2 flex-grow-1" style="max-width: 480px;">
+    <div class="input-group rounded-pill border shadow-sm overflow-hidden bg-white">
+      <span class="input-group-text bg-white border-0 ps-3 text-secondary"><i class="bi bi-search"></i></span>
+      <input type="text" id="airbnbSearchInput" class="form-control border-0 py-2 shadow-none" placeholder="Search destinations, states, or campgrounds..." autocomplete="off">
+    </div>
   </div>
 
-  <!-- Add hover effect styling -->
-  <style>
-    .transition-all:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+  <div class="d-flex align-items-center gap-2">
+    <div class="btn-group rounded-pill border shadow-sm p-1 bg-white" role="group">
+      <button type="button" class="btn btn-sm btn-dark rounded-pill px-3 py-1 price-filter-btn active" data-price="all">All</button>
+      <button type="button" class="btn btn-sm btn-light rounded-pill px-3 py-1 price-filter-btn" data-price="budget">&lt; $30</button>
+      <button type="button" class="btn btn-sm btn-light rounded-pill px-3 py-1 price-filter-btn" data-price="mid">$30 - $60</button>
+      <button type="button" class="btn btn-sm btn-light rounded-pill px-3 py-1 price-filter-btn" data-price="premium">$60+</button>
+    </div>
+  </div>
+</div>
+
+<!-- Map Container (Hidden by default, toggled with floating button) -->
+<div id="mapContainer" class="d-none mb-4 rounded-4 overflow-hidden border shadow-sm position-relative">
+  <div id="map" style="width: 100%; height: 480px;"></div>
+</div>
+
+<!-- Campgrounds Cards Grid (Airbnb Style) -->
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="campgroundsGrid">
+  <% for (let campground of campgrounds) { %>
+    <div class="col campground-item-col"
+         data-title="<%= campground.title.toLowerCase() %>"
+         data-location="<%= campground.location ? campground.location.toLowerCase() : '' %>"
+         data-price="<%= campground.price || 0 %>">
+      
+      <a href="/campgrounds/<%= campground._id %>" class="airbnb-card">
+        <!-- Image Shell -->
+        <div class="airbnb-card-img-shell">
+          <% if (campground.image && campground.image.length > 0) { %>
+            <img src="<%= campground.image[0].url %>" alt="<%= campground.title %>" loading="lazy">
+          <% } else { %>
+            <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80" alt="Campsite photo">
+          <% } %>
+
+          <span class="airbnb-guest-favorite-badge">Guest favorite</span>
+          
+          <button type="button" class="airbnb-heart-btn" aria-label="Add to wishlist" onclick="event.preventDefault(); this.classList.toggle('text-danger');">
+            <i class="bi bi-heart-fill"></i>
+          </button>
+        </div>
+
+        <!-- Info Lines -->
+        <div class="airbnb-card-info">
+          <div class="airbnb-card-header">
+            <h5 class="airbnb-card-title"><%= campground.title %></h5>
+            <div class="airbnb-card-rating">
+              <i class="bi bi-star-fill text-dark small"></i>
+              <span>4.9</span>
+            </div>
+          </div>
+
+          <div class="airbnb-card-location"><%= campground.location || 'United States' %></div>
+          <div class="airbnb-card-dates">Stay available this week</div>
+          <div class="airbnb-card-price">
+            <strong>$<%= campground.price %></strong> night
+          </div>
+        </div>
+      </a>
+    </div>
+  <% } %>
+</div>
+
+<!-- No Results Match State -->
+<div id="noMatchBox" class="text-center py-5 d-none">
+  <i class="bi bi-tree text-muted fs-1 d-block mb-3"></i>
+  <h4 class="fw-bold mb-2">No campgrounds found</h4>
+  <p class="text-secondary small mb-3">Try changing or clearing some of your filters.</p>
+  <button id="clearFiltersBtn" class="btn btn-outline-dark rounded-pill px-4 py-2 small fw-semibold">
+    Clear all filters
+  </button>
+</div>
+
+<!-- Floating "Show Map" Pill Button (Airbnb Signature) -->
+<button class="airbnb-floating-map-btn" id="floatingMapBtn" type="button">
+  <span id="mapBtnText">Show map</span>
+  <i class="bi bi-map-fill" id="mapBtnIcon"></i>
+</button>
+
+<!-- MapTiler Script Initialization -->
+<%- "<script>" %>
+  const maptilerApiKey = "<%- process.env.MAPTILER_API_KEY %>";
+  const campgrounds = {
+    type: "FeatureCollection",
+    features: <%- JSON.stringify(campgrounds.map(campground => ({
+      type: "Feature",
+      geometry: campground.geometry,
+      properties: { popUpMarkup: campground?.properties?.popUpMarkup }
+    }))) %>
+  };
+<%- "</script>" %>
+
+<script src="/javascripts/clusterMap.js"></script>
+
+<!-- Airbnb Interactive Filter & Map Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('airbnbSearchInput');
+    const priceBtns = document.querySelectorAll('.price-filter-btn');
+    const categoryItems = document.querySelectorAll('.category-item');
+    const cards = Array.from(document.querySelectorAll('.campground-item-col'));
+    const noMatchBox = document.getElementById('noMatchBox');
+    const clearBtn = document.getElementById('clearFiltersBtn');
+    const floatingMapBtn = document.getElementById('floatingMapBtn');
+    const mapContainer = document.getElementById('mapContainer');
+    const mapBtnText = document.getElementById('mapBtnText');
+    const mapBtnIcon = document.getElementById('mapBtnIcon');
+
+    let activePrice = 'all';
+    let searchQuery = '';
+    let isMapVisible = false;
+
+    // Toggle Map
+    floatingMapBtn.addEventListener('click', function() {
+      isMapVisible = !isMapVisible;
+      if (isMapVisible) {
+        mapContainer.classList.remove('d-none');
+        mapBtnText.textContent = 'Show list';
+        mapBtnIcon.className = 'bi bi-list-ul';
+        if (typeof map !== 'undefined' && map.resize) {
+          map.resize();
+        }
+        mapContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        mapContainer.classList.add('d-none');
+        mapBtnText.textContent = 'Show map';
+        mapBtnIcon.className = 'bi bi-map-fill';
+      }
+    });
+
+    function filterCards() {
+      let visible = 0;
+      cards.forEach(card => {
+        const title = card.getAttribute('data-title') || '';
+        const loc = card.getAttribute('data-location') || '';
+        const price = parseFloat(card.getAttribute('data-price')) || 0;
+
+        const matchSearch = !searchQuery || title.includes(searchQuery) || loc.includes(searchQuery);
+        let matchPrice = true;
+        if (activePrice === 'budget') matchPrice = price < 30;
+        else if (activePrice === 'mid') matchPrice = price >= 30 && price <= 60;
+        else if (activePrice === 'premium') matchPrice = price > 60;
+
+        if (matchSearch && matchPrice) {
+          card.classList.remove('d-none');
+          visible++;
+        } else {
+          card.classList.add('d-none');
+        }
+      });
+
+      if (noMatchBox) {
+        noMatchBox.classList.toggle('d-none', visible > 0);
+      }
     }
 
-    .card-img-top:hover {
-      transform: scale(1.05);
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        searchQuery = e.target.value.toLowerCase().trim();
+        filterCards();
+      });
     }
 
-    .fancy-clamp {
-      /* WebKit fallback (works today in Chromium / Safari) */
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      -webkit-line-clamp: 3;
+    priceBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        priceBtns.forEach(b => {
+          b.classList.remove('btn-dark', 'active');
+          b.classList.add('btn-light');
+        });
+        this.classList.add('btn-dark', 'active');
+        this.classList.remove('btn-light');
+        activePrice = this.getAttribute('data-price');
+        filterCards();
+      });
+    });
 
-      /* Standard property (future-proof / progressive enhancement) */
-      line-clamp: 3;
+    categoryItems.forEach(item => {
+      item.addEventListener('click', function() {
+        categoryItems.forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function() {
+        if (searchInput) searchInput.value = '';
+        searchQuery = '';
+        activePrice = 'all';
+        priceBtns.forEach((b, idx) => {
+          if (idx === 0) {
+            b.classList.add('btn-dark', 'active');
+            b.classList.remove('btn-light');
+          } else {
+            b.classList.remove('btn-dark', 'active');
+            b.classList.add('btn-light');
+          }
+        });
+        filterCards();
+      });
     }
-  </style>
-
-  <%- "<script>" %>
-    const maptilerApiKey = "<%- process.env.MAPTILER_API_KEY %>";
-      const campgrounds = {
-      type: "FeatureCollection",
-      features: <%- JSON.stringify( campgrounds.map(campground=> ({
-        type: "Feature",
-        geometry: campground.geometry,
-        properties: { popUpMarkup: campground?.properties?.popUpMarkup }
-        }))
-        ) %>
-        };
-        <%- "</script>" %>
-
-          <script src="/javascripts/clusterMap.js"></script>
+  });
+</script>

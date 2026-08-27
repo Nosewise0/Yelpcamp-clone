@@ -1,142 +1,334 @@
-body {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+/* ===================================================
+   YelpCamp — Airbnb Signature Homepage Styles
+   =================================================== */
+
+/* Hero Container */
+.airbnb-home-hero {
   position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  margin: 16px 0 48px;
+  height: 580px;
+  background: url('https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=1800&q=80') center center / cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
 
-.cover-container {
-  position: relative;
+.airbnb-home-hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.7) 100%);
   z-index: 1;
 }
 
-.navbar-brand {
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 2px;
+/* Floating Big Search Bar in Hero */
+.airbnb-hero-search-container {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  margin: 0 auto;
+  width: 100%;
 }
 
-.nav-link {
-  font-weight: 600;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  color: rgba(255, 255, 255, 0.85) !important;
+.airbnb-hero-search-bar {
+  background: #FFFFFF;
+  border-radius: 9999px;
+  box-shadow: 0 16px 32px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  padding: 8px 8px 8px 24px;
+  border: 1px solid #EBEBEB;
 }
 
-.nav-link:hover {
-  color: white !important;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 0.5rem;
+.hero-search-segment {
+  flex: 1;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 9999px;
+  transition: background 0.2s ease;
 }
 
-.nav-link.active {
-  color: white !important;
+.hero-search-segment:hover {
+  background-color: #F7F7F7;
 }
 
-.hero-section {
-  margin: auto 0;
-  text-align: center;
-  color: white;
-  padding: 3rem 0;
-}
-
-.hero-title {
-  font-size: 4rem;
+.hero-search-label {
+  display: block;
+  font-size: 0.72rem;
   font-weight: 800;
-  margin-bottom: 1.5rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.hero-subtitle {
-  font-size: 1.3rem;
-  line-height: 1.8;
-  margin-bottom: 3rem;
-  color: rgba(255, 255, 255, 0.95);
-  font-weight: 300;
-}
-
-.hero-icon {
-  font-size: 5rem;
-  margin-bottom: 1.5rem;
-}
-
-.cta-button {
-  font-size: 1.1rem;
-  padding: 0.75rem 2.5rem;
-  font-weight: 700;
-  border-radius: 50px;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
+  color: #222222;
+  margin-bottom: 2px;
 }
 
-.cta-button:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-.btn-explore {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  color: white;
+.hero-search-input {
   border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.95rem;
+  color: #222222;
+  width: 100%;
+  padding: 0;
+  font-family: inherit;
 }
 
-.btn-explore:hover {
-  color: white;
-  background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+.hero-search-input::placeholder {
+  color: #717171;
+  font-weight: 400;
 }
 
-.feature-card {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 1rem;
-  padding: 2rem;
-  color: white;
-  transition: all 0.3s ease;
-  height: 100%;
+.hero-search-divider {
+  width: 1px;
+  height: 32px;
+  background-color: #DDDDDD;
 }
 
-.feature-card:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transform: translateY(-10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.feature-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.feature-card h4 {
+.hero-search-submit-btn {
+  background: radial-gradient(circle at center, #FF385C 0%, #E61E4D 50%, #D70466 100%);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 9999px;
+  padding: 14px 24px;
+  font-size: 1rem;
   font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  flex-shrink: 0;
+  text-decoration: none;
 }
 
-.feature-card p {
-  color: rgba(255, 255, 255, 0.85);
+.hero-search-submit-btn:hover {
+  opacity: 0.95;
+  transform: scale(1.02);
+  color: #FFFFFF;
+}
+
+/* Hero Bottom Content */
+.airbnb-hero-bottom {
+  position: relative;
+  z-index: 2;
+  color: #FFFFFF;
+  max-width: 600px;
+}
+
+.airbnb-hero-bottom h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.airbnb-hero-bottom p {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.95);
+  margin-bottom: 24px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+.airbnb-flexible-btn {
+  background: #FFFFFF;
+  color: #222222;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 9999px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+
+.airbnb-flexible-btn:hover {
+  background: #F7F7F7;
+  transform: scale(1.04);
+  color: #000000;
+}
+
+/* Destination Card Grid (Inspiration) */
+.destination-card {
+  display: block;
+  text-decoration: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: #FFFFFF;
+  border: 1px solid #EBEBEB;
+}
+
+.destination-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+}
+
+.destination-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.destination-card-body {
+  padding: 16px;
+}
+
+.destination-card-body h6 {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 4px;
+  color: #222222;
+}
+
+.destination-card-body p {
+  font-size: 0.85rem;
+  color: #717171;
   margin: 0;
 }
 
-.footer-custom {
-  color: rgba(255, 255, 255, 0.7);
-  font-weight: 500;
+/* Airbnb Experience Cards */
+.experience-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 340px;
+  display: flex;
+  align-items: flex-end;
+  padding: 24px;
+  text-decoration: none;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2.5rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-
-  .hero-icon {
-    font-size: 3.5rem;
-  }
-
-  .cta-button {
-    font-size: 1rem;
-    padding: 0.6rem 2rem;
-  }
+.experience-card:hover {
+  transform: scale(1.02);
 }
 
+.experience-card img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.experience-card:hover img {
+  transform: scale(1.05);
+}
+
+.experience-card-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%);
+  z-index: 1;
+}
+
+.experience-card-content {
+  position: relative;
+  z-index: 2;
+  color: #FFFFFF;
+}
+
+.experience-card-content h4 {
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 1.35rem;
+  margin-bottom: 6px;
+}
+
+.experience-card-content p {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.experience-card-btn {
+  background: #FFFFFF;
+  color: #222222;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  display: inline-block;
+}
+
+/* Host Earnings Banner */
+.airbnb-host-banner {
+  background: linear-gradient(135deg, #FF385C 0%, #D70466 100%);
+  border-radius: 24px;
+  padding: 56px 48px;
+  color: #FFFFFF;
+  margin-bottom: 56px;
+  box-shadow: 0 12px 32px rgba(224, 11, 65, 0.25);
+}
+
+.airbnb-host-banner h2 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.airbnb-host-banner p {
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 540px;
+}
+
+.airbnb-host-white-btn {
+  background: #FFFFFF;
+  color: #222222;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s ease;
+}
+
+.airbnb-host-white-btn:hover {
+  transform: scale(1.03);
+  color: #000000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .airbnb-home-hero {
+    height: auto;
+    padding: 24px;
+  }
+  .airbnb-hero-bottom h1 {
+    font-size: 2.2rem;
+  }
+  .airbnb-hero-search-bar {
+    flex-direction: column;
+    border-radius: 16px;
+    padding: 16px;
+    gap: 12px;
+  }
+  .hero-search-divider {
+    display: none;
+  }
+  .hero-search-segment {
+    width: 100%;
+    padding: 6px 0;
+  }
+  .hero-search-submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

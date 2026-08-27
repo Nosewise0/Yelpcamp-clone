@@ -1,156 +1,68 @@
 <% layout('layout/boilerplate') %>
 
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <!-- Header Section -->
-    <div class="col-lg-8 text-center mb-5">
-      <h1 class="display-4 fw-bold text-primary mb-3">
-        <i class="bi bi-plus-circle-fill"></i> Create New Campground
-      </h1>
-      <p class="lead text-muted">Share your favorite camping spot with the world</p>
-      <hr class="w-50 mx-auto my-4">
+<div class="container-xl py-5">
+  <div class="airbnb-modal-card" style="max-width: 620px;">
+    <div class="airbnb-modal-header text-start px-4 pt-4 pb-2 border-0">
+      <span class="badge bg-danger bg-opacity-10 text-danger rounded-pill px-3 py-1 fw-bold text-uppercase mb-2" style="font-size: 0.7rem;">
+        Host Setup
+      </span>
+      <h2 class="fw-bold mb-1">YelpCamp your campsite</h2>
+      <p class="text-secondary small mb-0">Tell us about your spot to share it with outdoor explorers worldwide.</p>
     </div>
 
-    <!-- Form Card -->
-    <div class="col-lg-7">
-      <div class="card border-0 shadow-lg rounded-4 p-5">
-        <form action="/campgrounds" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
-          
-          <!-- Title Field -->
-          <div class="mb-4">
-            <label class="form-label fw-bold mb-2" for="title">
-              <i class="bi bi-chat-left text-primary"></i> Campground Title
-            </label>
-            <input class="form-control form-control-lg rounded-3 border-2" 
-              type="text" id="title" name="campground[title]"
-              placeholder="Give your campground an awesome name..." required>
+    <div class="airbnb-modal-body px-4 pt-3 pb-4">
+      <form action="/campgrounds" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
+        
+        <!-- Segmented Input Box -->
+        <div class="airbnb-segmented-input mb-4">
+          <!-- Title -->
+          <div class="segmented-input-row">
+            <label for="title">Campsite Title</label>
+            <input type="text" id="title" name="campground[title]" placeholder="e.g. Pine Ridge Camp Retreat" required>
+            <div class="invalid-feedback">Please provide a campsite title.</div>
           </div>
 
-          <!-- Location Field -->
-          <div class="mb-4">
-            <label class="form-label fw-bold mb-2" for="location">
-              <i class="bi bi-geo-alt text-danger"></i> Location
-            </label>
-            <input class="form-control form-control-lg rounded-3 border-2" 
-              type="text" id="location" name="campground[location]"
-              placeholder="City, State or Coordinates..." required>
+          <!-- Location -->
+          <div class="segmented-input-row">
+            <label for="location">Location / Address</label>
+            <input type="text" id="location" name="campground[location]" placeholder="City, State or National Park" required>
+            <div class="invalid-feedback">Please enter a location.</div>
           </div>
 
-          <!-- Price Field -->
-          <div class="mb-4">
-            <label class="form-label fw-bold mb-2" for="price">
-              <i class="bi bi-cash-coin text-success"></i> Price per Night
-            </label>
-            <div class="input-group input-group-lg">
-              <span class="input-group-text bg-success text-white border-0 rounded-start-3" id="price-label">$</span>
-              <input type="text" class="form-control rounded-end-3 border-2" id="price" 
-                placeholder="0.00" aria-label="price"
-                aria-describedby="price-label" name="campground[price]" required>
-            </div>
+          <!-- Price -->
+          <div class="segmented-input-row">
+            <label for="price">Nightly Rate ($ USD)</label>
+            <input type="number" step="0.01" min="0" id="price" name="campground[price]" placeholder="0.00" required>
+            <div class="invalid-feedback">Please enter a nightly rate.</div>
           </div>
 
-          <!-- Description Field -->
-          <div class="mb-4">
-            <label class="form-label fw-bold mb-2" for="description">
-              <i class="bi bi-justify-left text-info"></i> Description
-            </label>
-            <textarea class="form-control rounded-3 border-2" id="description" 
-              name="campground[description]"
-              placeholder="Describe your campground... (amenities, views, activities, etc.)" 
-              rows="5" required></textarea>
-            <small class="text-muted">Help travelers understand what makes your campground special</small>
+          <!-- Description -->
+          <div class="segmented-input-row">
+            <label for="description">Description</label>
+            <textarea id="description" name="campground[description]" rows="4" placeholder="Tell guests about your campsite, terrain, wildlife, and amenities..." required></textarea>
+            <div class="invalid-feedback">Please provide a description.</div>
           </div>
+        </div>
 
-          <!-- Image Upload Field with Validation -->
-          <div class="mb-5">
-            <label class="form-label fw-bold mb-2" for="image">
-              <i class="bi bi-image text-warning"></i> Upload Images
-            </label>
-            <div class="input-group input-group-lg">
-              <input type="file" class="form-control rounded-start-3 border-2" 
-                id="image" name="image" multiple accept="image/*" required>
-              <label class="input-group-text bg-warning rounded-end-3 border-0 cursor-pointer" for="image">
-                <i class="bi bi-cloud-arrow-up"></i> Choose Files
-              </label>
-            </div>
-            <small class="text-muted d-block mt-2">You can upload multiple images (JPG, PNG, etc.)</small>
-          </div>
+        <!-- Photo Upload Dropzone -->
+        <div class="mb-4">
+          <label class="form-label fw-bold small text-secondary">Photos</label>
+          <label class="d-block text-center p-4 border rounded-3 bg-light cursor-pointer" for="image" style="cursor: pointer;">
+            <i class="bi bi-images fs-2 text-secondary d-block mb-2"></i>
+            <strong class="d-block text-dark small">Upload high quality photos</strong>
+            <span class="small text-muted">Select multiple images to showcase your campsite</span>
+            <input type="file" class="d-none" id="image" name="image" multiple accept="image/*" required>
+          </label>
+        </div>
 
-          <!-- Submit Button -->
-          <div class="d-grid gap-2 mb-3">
-            <button class="btn btn-success btn-lg rounded-pill fw-bold" type="submit">
-              <i class="bi bi-check-circle-fill"></i> Create Campground
-            </button>
-          </div>
-
-          <!-- Cancel Link -->
-          <div class="text-center">
-            <a href="/campgrounds" class="text-muted text-decoration-none">
-              <i class="bi bi-arrow-left"></i> Back to Campgrounds
-            </a>
-          </div>
-        </form>
-      </div>
+        <!-- Action Buttons -->
+        <div class="d-flex align-items-center justify-content-between pt-3 border-top">
+          <a href="/campgrounds" class="text-dark fw-bold text-decoration-underline small">Cancel</a>
+          <button class="airbnb-primary-btn" style="width: auto;" type="submit">
+            Publish listing
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
-
-<style>
-  .cursor-pointer {
-    cursor: pointer;
-  }
-  
-  .form-control-lg, .input-group-lg .form-control, .input-group-lg .input-group-text {
-    padding: 0.75rem 1.25rem;
-    font-size: 1.1rem;
-  }
-  
-  .rounded-3 {
-    border-radius: 0.5rem;
-  }
-
-  .rounded-start-3 {
-    border-radius: 0.5rem 0 0 0.5rem;
-  }
-
-  .rounded-end-3 {
-    border-radius: 0 0.5rem 0.5rem 0;
-  }
-
-  /* Hide default file input */
-  #image {
-    cursor: pointer;
-  }
-
-  #image::-webkit-file-upload-button {
-    display: none;
-  }
-
-  /* Style file input label on hover */
-  .input-group-text:hover {
-    background-color: #ffb81c !important;
-    transform: translateY(-2px);
-    transition: all 0.3s ease;
-  }
-
-  /* Validation styles */
-  .form-control.is-invalid,
-  .input-group-lg .form-control.is-invalid {
-    border-color: #dc3545;
-  }
-
-  .form-control.is-valid,
-  .input-group-lg .form-control.is-valid {
-    border-color: #28a745;
-  }
-
-  .invalid-feedback {
-    display: block;
-  }
-
-  .valid-feedback {
-    display: block;
-  }
-</style>
-
-<script src="/javascripts/new.js"></script>

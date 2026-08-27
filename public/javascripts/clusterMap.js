@@ -2,7 +2,7 @@ maptilersdk.config.apiKey = maptilerApiKey;
 
 const map = new maptilersdk.Map({
     container: 'map',
-    style: maptilersdk.MapStyle.BRIGHT,
+    style: maptilersdk.MapStyle.STREETS,
     center: [-103.59179687498357, 40.66995747013945],
     zoom: 3
 });
@@ -25,21 +25,23 @@ map.on('load', function () {
             'circle-color': [
                 'step',
                 ['get', 'point_count'],
-                '#00BCD4',
+                '#FF385C',
                 10,
-                '#2196F3',
+                '#E00B41',
                 30,
-                '#3F51B5'
+                '#D70466'
             ],
             'circle-radius': [
                 'step',
                 ['get', 'point_count'],
-                15,
+                18,
                 10,
-                20,
+                24,
                 30,
-                25
-            ]
+                30
+            ],
+            'circle-stroke-width': 3,
+            'circle-stroke-color': '#FFFFFF'
         }
     });
 
@@ -51,7 +53,10 @@ map.on('load', function () {
         layout: {
             'text-field': '{point_count_abbreviated}',
             'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-            'text-size': 12
+            'text-size': 13
+        },
+        paint: {
+            'text-color': '#FFFFFF'
         }
     });
 
@@ -61,14 +66,13 @@ map.on('load', function () {
         source: 'campgrounds',
         filter: ['!', ['has', 'point_count']],
         paint: {
-            'circle-color': '#11b4da',
-            'circle-radius': 4,
-            'circle-stroke-width': 1,
-            'circle-stroke-color': '#fff'
+            'circle-color': '#FF385C',
+            'circle-radius': 7,
+            'circle-stroke-width': 2.5,
+            'circle-stroke-color': '#FFFFFF'
         }
     });
 
-    
     map.on('click', 'clusters', async (e) => {
         const features = map.queryRenderedFeatures(e.point, {
             layers: ['clusters']
@@ -81,19 +85,17 @@ map.on('load', function () {
         });
     });
 
-   
     map.on('click', 'unclustered-point', function (e) {
         const { popUpMarkup } = e.features[0].properties;
         const coordinates = e.features[0].geometry.coordinates.slice();
 
-        
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
-        new maptilersdk.Popup()
+        new maptilersdk.Popup({ offset: 15 })
             .setLngLat(coordinates)
-            .setHTML(popUpMarkup)
+            .setHTML(popUpMarkup || '')
             .addTo(map);
     });
 
@@ -101,6 +103,12 @@ map.on('load', function () {
         map.getCanvas().style.cursor = 'pointer';
     });
     map.on('mouseleave', 'clusters', () => {
+        map.getCanvas().style.cursor = '';
+    });
+    map.on('mouseenter', 'unclustered-point', () => {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    map.on('mouseleave', 'unclustered-point', () => {
         map.getCanvas().style.cursor = '';
     });
 });

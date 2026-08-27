@@ -17,22 +17,22 @@
     transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1),
     box-shadow 0.35s;
 }
+
 .register-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.18);
 }
 
 .header-gradient {
-  background: linear-gradient(
-    90deg,
-    rgba(102, 126, 234, 1) 0%,
-    rgba(118, 75, 162, 1) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(102, 126, 234, 1) 0%,
+      rgba(118, 75, 162, 1) 100%);
   padding: 1.25rem 1.5rem;
   display: flex;
   gap: 1rem;
   align-items: center;
 }
+
 .header-gradient .btn {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
@@ -46,6 +46,7 @@
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
+
 .btn-gradient:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 26px rgba(40, 167, 69, 0.24);
@@ -54,6 +55,7 @@
 .form-control {
   background: #fff;
 }
+
 .form-control:focus {
   border-color: var(--accent);
   box-shadow: 0 6px 18px rgba(102, 126, 234, 0.12);
@@ -63,6 +65,7 @@
 .btn-outline-secondary {
   border-radius: 0.6rem;
 }
+
 .btn-outline-secondary .bi {
   color: var(--accent);
 }
@@ -71,6 +74,7 @@
 .form-label {
   position: relative;
 }
+
 .form-label::after {
   content: "";
   position: absolute;
@@ -82,8 +86,9 @@
   border-radius: 2px;
   transition: width 0.25s ease;
 }
-.form-control:focus + .invalid-feedback ~ .form-label::after,
-.form-control:focus ~ .form-label::after {
+
+.form-control:focus+.invalid-feedback~.form-label::after,
+.form-control:focus~.form-label::after {
   width: 40px;
 }
 
@@ -91,11 +96,13 @@
 .register-card {
   animation: floatIn 0.5s ease both;
 }
+
 @keyframes floatIn {
   from {
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -109,6 +116,7 @@
     align-items: flex-start;
     gap: 0.5rem;
   }
+
   .hero-sub {
     font-size: 0.9rem;
   }

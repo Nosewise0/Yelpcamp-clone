@@ -1,86 +1,213 @@
 <% layout('layout/boilerplate') %>
 <link rel="stylesheet" href="/stylesheets/stars.css" />
 
-<div class="container py-5">
-  <div class="row g-4">
-    <!-- Left Column: Carousel and Main Info -->
-    <div class="col-lg-7">
-      <!-- Carousel with enhanced styling -->
-      <div id="campgroundCarousel" class="carousel slide mb-4 rounded-4 overflow-hidden shadow-lg" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <% campground.image.forEach((img, i)=> { %>
-            <div class="carousel-item <%= i === 0 ? 'active' : ''%>" style="height: 400px;">
-              <img src="<%= img.url  %>" class="d-block w-100 h-100 object-fit-cover" alt="">
-            </div>
-          <% }) %>
-        </div>
-        <% if (campground.image.length > 1) { %>
-          <button class="carousel-control-prev" type="button" data-bs-target="#campgroundCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#campgroundCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+<div class="container-xxl py-4">
+  <!-- Title & Top Meta Section -->
+  <div class="mb-4">
+    <h1 class="airbnb-show-title"><%= campground.title %></h1>
+    <div class="airbnb-show-subline">
+      <div class="d-flex flex-wrap align-items-center gap-2">
+        <span class="fw-bold"><i class="bi bi-star-fill text-dark small me-1"></i>4.9</span>
+        <span>&bull;</span>
+        <a href="#reviewsSection" class="text-dark fw-semibold text-decoration-underline"><%= campground.reviews.length %> reviews</a>
+        <span>&bull;</span>
+        <span><i class="bi bi-award-fill text-danger me-1"></i>Superhost</span>
+        <span>&bull;</span>
+        <span class="text-decoration-underline fw-semibold"><%= campground.location %></span>
+      </div>
+      
+      <div class="d-flex gap-3">
+        <button class="btn btn-sm btn-link text-dark text-decoration-none fw-semibold p-0"><i class="bi bi-upload me-1"></i> Share</button>
+        <button class="btn btn-sm btn-link text-dark text-decoration-none fw-semibold p-0"><i class="bi bi-heart me-1"></i> Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Photo Collage Grid (Airbnb Signature) -->
+  <div class="airbnb-photo-grid">
+    <% if (campground.image && campground.image.length > 0) { %>
+      <img src="<%= campground.image[0].url %>" class="photo-main" alt="<%= campground.title %>">
+      <% for (let i = 1; i < 5; i++) { %>
+        <% if (campground.image[i]) { %>
+          <img src="<%= campground.image[i].url %>" alt="Campground photo">
+        <% } else { %>
+          <img src="<%= campground.image[0].url %>" alt="Campground photo">
         <% } %>
+      <% } %>
+    <% } else { %>
+      <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=80" class="photo-main" alt="Default hero">
+      <img src="https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=600&q=80" alt="Photo 2">
+      <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=600&q=80" alt="Photo 3">
+      <img src="https://images.unsplash.com/photo-1537905569824-f89f14cceb68?auto=format&fit=crop&w=600&q=80" alt="Photo 4">
+      <img src="https://images.unsplash.com/photo-1492648272180-61e45a8d98a7?auto=format&fit=crop&w=600&q=80" alt="Photo 5">
+    <% } %>
+  </div>
+
+  <div class="row g-5">
+    <!-- Left Column: Details, Host, Amenities, Reviews -->
+    <div class="col-lg-7 col-xl-8">
+      <!-- Host Header -->
+      <div class="airbnb-host-row">
+        <div>
+          <h3 class="h4 fw-bold mb-1">Campsite hosted by <%= campground.author ? campground.author.username : 'Superhost' %></h3>
+          <p class="text-secondary mb-0">6 guests &bull; 2 tent sites &bull; 1 fire pit &bull; 1 shared bath</p>
+        </div>
+        <div class="airbnb-host-avatar">
+          <%= campground.author ? campground.author.username.charAt(0).toUpperCase() : 'H' %>
+        </div>
       </div>
 
-      <!-- Main Info Card -->
-      <div class="card border-0 shadow-lg rounded-4 mb-4">
-        <div class="card-body p-4">
-          <h1 class="card-title mb-3 text-primary fw-bold"><%= campground.title%></h1>
-          <p class="card-text text-muted fs-5 lh-lg"><%= campground.description %></p>
+      <!-- Highlights -->
+      <div class="pb-4 border-bottom border-light mb-4">
+        <div class="airbnb-highlight-item">
+          <i class="bi bi-door-open"></i>
+          <div>
+            <h6 class="fw-bold mb-1">Self check-in</h6>
+            <p class="text-secondary small mb-0">Check yourself in with the digital keypad or onsite camp lockbox.</p>
+          </div>
         </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item border-0 ps-4 py-3">
-            <i class="bi bi-geo-alt-fill text-danger"></i>
-            <strong class="ms-2"><%= campground.location %></strong>
-          </li>
-          <li class="list-group-item border-0 ps-4 py-3">
-            <i class="bi bi-person-circle text-info"></i>
-            <strong class="ms-2">Submitted by <%= campground.author?.username || "Unknown" %></strong>
-          </li>
-          <li class="list-group-item border-0 ps-4 py-3 pb-0">
-            <i class="bi bi-cash-coin text-success"></i>
-            <h4 class="d-inline ms-2 text-success">$<%= campground.price %>/night</h4>
-          </li>
-        </ul>
+        <div class="airbnb-highlight-item">
+          <i class="bi bi-geo-alt"></i>
+          <div>
+            <h6 class="fw-bold mb-1">Great location</h6>
+            <p class="text-secondary small mb-0">95% of recent guests gave the location a 5-star rating.</p>
+          </div>
+        </div>
+        <div class="airbnb-highlight-item mb-0">
+          <i class="bi bi-calendar-check"></i>
+          <div>
+            <h6 class="fw-bold mb-1">Free cancellation for 48 hours</h6>
+            <p class="text-secondary small mb-0">Get a full refund if you change your plans within 48 hours of booking.</p>
+          </div>
+        </div>
+      </div>
 
-        <!-- Edit/Delete Buttons -->
-        <% if (currentUser && campground.author && campground.author._id.equals(currentUser._id)) { %>
-          <div class="card-body pt-4 d-flex gap-2">
-            <a href="/campgrounds/<%= campground._id %>/edit" class="btn btn-lg btn-warning rounded-pill px-4">
-              <i class="bi bi-pencil-square"></i> Edit Campground
+      <!-- AirCover Guarantee Badge -->
+      <div class="pb-4 border-bottom border-light mb-4">
+        <h4 class="fw-bold mb-2 text-danger">air<span class="text-dark">cover</span></h4>
+        <p class="text-secondary small mb-2">Every booking includes free protection from Host cancellations, listing inaccuracies, and other issues like trouble checking in.</p>
+        <a href="#" class="text-dark fw-bold small text-decoration-underline">Learn more</a>
+      </div>
+
+      <!-- Description -->
+      <div class="pb-4 border-bottom border-light mb-4">
+        <h4 class="h5 fw-bold mb-3">About this space</h4>
+        <p class="text-secondary lh-lg mb-0"><%= campground.description %></p>
+      </div>
+
+      <!-- What this place offers (Amenities) -->
+      <div class="pb-4 border-bottom border-light mb-4">
+        <h4 class="h5 fw-bold mb-4">What this place offers</h4>
+        <div class="airbnb-amenity-grid">
+          <div class="airbnb-amenity-row"><i class="bi bi-tree"></i> Mountain & forest view</div>
+          <div class="airbnb-amenity-row"><i class="bi bi-water"></i> Lake & waterfront access</div>
+          <div class="airbnb-amenity-row"><i class="bi bi-fire"></i> Private campfire pit</div>
+          <div class="airbnb-amenity-row"><i class="bi bi-p-circle"></i> Free parking on premises</div>
+          <div class="airbnb-amenity-row"><i class="bi bi-heart"></i> Pets allowed</div>
+          <div class="airbnb-amenity-row"><i class="bi bi-cup-hot"></i> Potable drinking water</div>
+        </div>
+      </div>
+
+      <!-- Host Action Controls (If Author) -->
+      <% if (currentUser && campground.author && campground.author._id.equals(currentUser._id)) { %>
+        <div class="pb-4 border-bottom border-light mb-4">
+          <h5 class="fw-bold mb-3">Host Controls</h5>
+          <div class="d-flex gap-2">
+            <a href="/campgrounds/<%= campground._id %>/edit" class="airbnb-btn-outline">
+              <i class="bi bi-pencil me-1"></i> Edit Listing
             </a>
-            <form class="d-inline" action="/campgrounds/<%= campground._id%>?_method=DELETE" method="POST">
-              <button class="btn btn-lg btn-danger rounded-pill px-4">
-                <i class="bi bi-trash3"></i> Delete
+            <form class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+              <button class="btn btn-outline-danger rounded-2 fw-semibold px-3 py-2">
+                <i class="bi bi-trash3 me-1"></i> Delete
               </button>
             </form>
           </div>
-        <% } %>
-      </div>
-    </div>
+        </div>
+      <% } %>
 
-    <!-- Right Column: Map and Reviews -->
-    <div class="col-lg-5">
-      <!-- Map -->
-      <div class="card border-0 shadow-lg rounded-4 mb-4">
-        <div id="map" style="width: 100%; height: 350px; border-radius: 1rem;"></div>
-      </div>
+      <!-- Reviews Section -->
+      <div id="reviewsSection" class="pt-2">
+        <h3 class="h4 fw-bold mb-4">
+          <i class="bi bi-star-fill text-dark me-1 small"></i> 4.9 &bull; <%= campground.reviews.length %> reviews
+        </h3>
 
-      <!-- Review Form -->
-      <% if (currentUser){ %>
-        <div class="card border-0 shadow-lg rounded-4 mb-4">
-          <div class="card-header bg-primary text-white border-0 rounded-top-4 p-4">
-            <h4 class="mb-0"><i class="bi bi-chat-left-quote"></i> Leave a Review</h4>
+        <!-- Category Ratings Breakdown -->
+        <div class="airbnb-review-category-grid">
+          <div class="airbnb-rating-bar-container">
+            <span>Cleanliness</span>
+            <div class="airbnb-progress-bar"><div class="airbnb-progress-fill" style="width: 98%;"></div></div>
+            <span class="fw-bold small">4.9</span>
           </div>
-          <div class="card-body p-4">
+          <div class="airbnb-rating-bar-container">
+            <span>Accuracy</span>
+            <div class="airbnb-progress-bar"><div class="airbnb-progress-fill" style="width: 100%;"></div></div>
+            <span class="fw-bold small">5.0</span>
+          </div>
+          <div class="airbnb-rating-bar-container">
+            <span>Communication</span>
+            <div class="airbnb-progress-bar"><div class="airbnb-progress-fill" style="width: 96%;"></div></div>
+            <span class="fw-bold small">4.8</span>
+          </div>
+          <div class="airbnb-rating-bar-container">
+            <span>Location</span>
+            <div class="airbnb-progress-bar"><div class="airbnb-progress-fill" style="width: 100%;"></div></div>
+            <span class="fw-bold small">5.0</span>
+          </div>
+          <div class="airbnb-rating-bar-container">
+            <span>Check-in</span>
+            <div class="airbnb-progress-bar"><div class="airbnb-progress-fill" style="width: 98%;"></div></div>
+            <span class="fw-bold small">4.9</span>
+          </div>
+          <div class="airbnb-rating-bar-container">
+            <span>Value</span>
+            <div class="airbnb-progress-bar"><div class="airbnb-progress-fill" style="width: 94%;"></div></div>
+            <span class="fw-bold small">4.7</span>
+          </div>
+        </div>
+
+        <!-- Reviews List -->
+        <% if (campground.reviews.length === 0) { %>
+          <p class="text-secondary">No reviews yet for this campground. Be the first to leave a review below!</p>
+        <% } else { %>
+          <div class="row g-4 mb-4">
+            <% for (let review of campground.reviews) { %>
+              <div class="col-md-6">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="airbnb-avatar bg-dark text-white">
+                      <%= review.author ? review.author.username.charAt(0).toUpperCase() : 'U' %>
+                    </div>
+                    <div>
+                      <h6 class="fw-bold mb-0 text-dark"><%= review.author ? review.author.username : 'Camper' %></h6>
+                      <small class="text-muted">October 2026</small>
+                    </div>
+                  </div>
+
+                  <% if (currentUser && review.author && review.author.equals(currentUser._id)) { %>
+                    <form action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST" class="d-inline">
+                      <button class="btn btn-sm text-secondary border-0 p-0" title="Delete Review">
+                        <i class="bi bi-trash3"></i>
+                      </button>
+                    </form>
+                  <% } %>
+                </div>
+
+                <p class="starability-result mb-1" data-rating="<%= review.rating %>">
+                  Rated: <%= review.rating %> stars
+                </p>
+                <p class="text-secondary small mb-0"><%= review.body %></p>
+              </div>
+            <% } %>
+          </div>
+        <% } %>
+
+        <!-- Leave A Review Box -->
+        <% if (currentUser) { %>
+          <div class="card p-4 rounded-3 border bg-white mt-4">
+            <h5 class="fw-bold mb-3">Leave a review for this campsite</h5>
             <form action="/campgrounds/<%= campground._id %>/reviews" method="POST" class="needs-validation" novalidate>
-              <!-- Rating Stars -->
-              <div class="mb-4">
-                <label class="form-label fw-bold mb-3">Your Rating</label>
+              <div class="mb-3">
+                <label class="form-label fw-bold small text-secondary">Rating</label>
                 <fieldset class="starability-basic">
                   <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
                   <input type="radio" id="first-rate1" name="review[rating]" value="1" />
@@ -96,60 +223,94 @@
                 </fieldset>
               </div>
 
-              <!-- Review Text -->
-              <div class="mb-4">
-                <label class="form-label fw-bold" for="body">Your Review</label>
-                <textarea class="form-control form-control-lg rounded-3 border-2" name="review[body]" id="body" cols="30" rows="5" placeholder="Share your experience..." required></textarea>
+              <div class="mb-3">
+                <label class="form-label fw-bold small text-secondary" for="body">Your Review</label>
+                <textarea class="form-control rounded-2 p-3" name="review[body]" id="body" rows="3" placeholder="Share your experience at this campsite..." required></textarea>
+                <div class="invalid-feedback">Please write a review.</div>
               </div>
 
-              <button class="btn btn-success btn-lg w-100 rounded-pill">
-                <i class="bi bi-send-fill"></i> Submit Review
+              <button class="airbnb-btn-primary">
+                Post Review
               </button>
             </form>
           </div>
-        </div>
-      <% } %>
-
-      <!-- Reviews List -->
-      <div>
-        <h5 class="mb-3 fw-bold text-dark">Reviews (<%= campground.reviews.length %>)</h5>
-        <% if (campground.reviews.length === 0) { %>
-          <div class="alert alert-info rounded-4" role="alert">
-            No reviews yet. Be the first to review this campground!
-          </div>
-        <% } else { %>
-          <% for(let review of campground.reviews) {%>
-            <div class="card border-0 shadow-sm rounded-4 mb-3 transition" style="cursor: pointer;">
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-start mb-2">
-                  <h5 class="card-title mb-0">
-                    <i class="bi bi-person-circle text-muted"></i>
-                    <strong class="ms-2"><%= review.author.username %></strong>
-                  </h5>
-                  <% if(currentUser && review.author.equals(currentUser._id)) { %>
-                    <form action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST" style="display: inline;">
-                      <button class="btn btn-sm btn-danger rounded-pill">
-                        <i class="bi bi-trash3"></i> Delete
-                      </button>
-                    </form>
-                  <% } %>
-                </div>
-                <p class="starability-result mb-2" data-rating="<%= review.rating %>">
-                  <span class="badge bg-warning text-dark">★ <%= review.rating %>/5</span>
-                </p>
-                <p class="card-text text-muted"><%= review.body %></p>
-              </div>
-            </div>
-          <% } %>
         <% } %>
+      </div>
+    </div>
+
+    <!-- Right Column: Sticky Airbnb Reservation Card -->
+    <div class="col-lg-5 col-xl-4">
+      <div class="airbnb-reserve-card">
+        <!-- Price Header -->
+        <div class="airbnb-price-header">
+          <div>
+            <span class="price-amount">$<%= campground.price %></span>
+            <span class="text-secondary small"> night</span>
+          </div>
+          <div class="small fw-semibold">
+            <i class="bi bi-star-fill text-dark me-1 small"></i> 4.9 &bull; <span class="text-secondary"><%= campground.reviews.length %> reviews</span>
+          </div>
+        </div>
+
+        <!-- Date / Guest Selector Box -->
+        <div class="airbnb-reserve-box">
+          <div class="airbnb-reserve-dates">
+            <div class="airbnb-date-field">
+              <span class="airbnb-date-label">Check-in</span>
+              <span class="airbnb-date-val">10/24/2026</span>
+            </div>
+            <div class="airbnb-date-field">
+              <span class="airbnb-date-label">Checkout</span>
+              <span class="airbnb-date-val">10/29/2026</span>
+            </div>
+          </div>
+          <div class="p-2 px-3">
+            <span class="airbnb-date-label">Guests</span>
+            <span class="airbnb-date-val">2 guests, 1 tent</span>
+          </div>
+        </div>
+
+        <!-- Reserve CTA Button -->
+        <button class="airbnb-reserve-btn" type="button">
+          Reserve
+        </button>
+
+        <p class="text-center text-secondary small mt-2 mb-0">You won't be charged yet</p>
+
+        <!-- Price Breakdown -->
+        <div class="airbnb-price-breakdown">
+          <div class="airbnb-price-row">
+            <span>$<%= campground.price %> x 5 nights</span>
+            <span>$<%= campground.price * 5 %></span>
+          </div>
+          <div class="airbnb-price-row">
+            <span>Cleaning fee</span>
+            <span>$35</span>
+          </div>
+          <div class="airbnb-price-row">
+            <span>YelpCamp service fee</span>
+            <span>$45</span>
+          </div>
+          <div class="airbnb-price-total">
+            <span>Total before taxes</span>
+            <span>$<%= (campground.price * 5) + 80 %></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Map Widget Box -->
+      <div class="card border rounded-3 p-3 mt-4 bg-white shadow-sm">
+        <h6 class="fw-bold mb-2">Where you'll be</h6>
+        <div id="map" style="width: 100%; height: 220px; border-radius: 8px;"></div>
+        <p class="small text-secondary mt-2 mb-0"><i class="bi bi-geo-alt me-1"></i> <%= campground.location %></p>
       </div>
     </div>
   </div>
 </div>
 
-<%-"<script>"%>
+<%- "<script>" %>
   const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
   const campground = <%- JSON.stringify(campground) %>;
-<%-"</script>"%>
+<%- "</script>" %>
 
 <script src="/javascripts/showPageMap.js"></script>
