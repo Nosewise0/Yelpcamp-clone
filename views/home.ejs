@@ -30,254 +30,279 @@
   <!-- Airbnb Header -->
   <%- include('./partials/navbar') %>
 
-    <!-- Main Content -->
-    <main class="site-main">
-      <div class="container-xxl px-3 px-md-4">
+  <!-- Main Content -->
+  <main class="site-main">
+    <div class="container-xxl px-3 px-md-4">
 
-        <!-- Airbnb Split Hero -->
-        <section class="airbnb-home-hero-split">
-          <!-- Left: Content & Search -->
-          <div class="hero-split-left">
-            <div class="hero-split-badge">Over 4 verified campsites</div>
-            <h1 class="hero-split-title">Find your perfect campsite</h1>
-            <p class="hero-split-sub">Discover unique wilderness spots, lakeside retreats, and national park campgrounds
-              vetted by our community.</p>
+      <!-- Immersive Full-Width Hero Section -->
+      <section class="immersive-hero mb-5">
+        <div class="hero-bg-media">
+          <img src="/images/hero-photo.png" alt="YelpCamp wilderness camping" class="hero-bg-img">
+          <div class="hero-gradient-overlay"></div>
+        </div>
 
-            <!-- Floating Search Bar -->
-            <form action="/campgrounds" method="GET" class="airbnb-hero-search-bar hero-split-search">
+        <div class="hero-inner-content">
+          <!-- Hero Header Text -->
+          <div class="hero-header-badge">
+            <i class="bi bi-stars"></i> Verified Wilderness Campsites
+          </div>
+          <h1 class="hero-headline">Find your next unforgettable campsite</h1>
+          <p class="hero-subheadline">
+            Discover curated retreats, lakeside stays, and national park campgrounds vetted by our outdoor community.
+          </p>
+
+          <!-- Floating Center Search Capsule -->
+          <div class="hero-search-wrapper">
+            <form action="/campgrounds" method="GET" class="hero-search-capsule">
               <!-- Where -->
-              <div class="hero-search-segment">
+              <div class="hero-search-segment flex-grow-1">
                 <label class="hero-search-label" for="searchWhere">Where</label>
-                <input type="text" id="searchWhere" class="hero-search-input"
-                  placeholder="National parks, lakesides...">
+                <input type="text" id="searchWhere" class="hero-search-input" name="search"
+                  placeholder="National parks, lakesides, mountains...">
               </div>
 
-              <div class="hero-search-divider"></div>
+              <div class="hero-search-divider d-none d-md-block"></div>
 
-              <!-- Check in -->
-              <div class="hero-search-segment">
+              <!-- Check-in -->
+              <div class="hero-search-segment d-none d-md-block">
                 <label class="hero-search-label">Check in</label>
                 <input type="text" class="hero-search-input" placeholder="Add dates" onfocus="(this.type='date')"
                   onblur="(this.type='text')">
               </div>
 
-              <div class="hero-search-divider"></div>
+              <div class="hero-search-divider d-none d-md-block"></div>
 
               <!-- Who -->
-              <div class="hero-search-segment">
+              <div class="hero-search-segment d-none d-lg-block">
                 <label class="hero-search-label">Who</label>
                 <input type="text" class="hero-search-input" placeholder="Add campers">
               </div>
 
-              <!-- Search Button -->
-              <button type="submit" class="hero-search-submit-btn">
+              <!-- Submit Button -->
+              <button type="submit" class="hero-search-action-btn">
                 <i class="bi bi-search"></i>
-                <span>Search</span>
+                <span class="d-none d-sm-inline">Search</span>
               </button>
             </form>
-
-            <!-- Flexible CTA -->
-            <div class="hero-split-cta">
-              <a href="/campgrounds" class="airbnb-flexible-btn">
-                <span class="text-danger fw-bold">I'm flexible</span>
-                <i class="bi bi-arrow-right text-danger"></i>
-              </a>
-            </div>
-
-            <!-- Stats row -->
-            <div class="hero-split-stats">
-              <div class="hero-stat-item">
-                <strong>0</strong>
-                <span>Happy Campers</span>
-              </div>
-              <div class="hero-stat-divider"></div>
-              <div class="hero-stat-item">
-                <strong>4+</strong>
-                <span>Campsites Listed</span>
-              </div>
-              <div class="hero-stat-divider"></div>
-              <div class="hero-stat-item">
-                <strong>4.9 ★</strong>
-                <span>Avg. Rating</span>
-              </div>
-            </div>
           </div>
 
-          <!-- Right: Hero Image Collage -->
-          <div class="hero-split-right">
-            <div class="hero-img-collage">
-              <div class="hero-img-main">
-                <img src="/images/hero-photo.png" alt="Camping in the wilderness">
-                <div class="hero-img-badge">
-                  <i class="bi bi-award-fill text-danger me-1"></i>
-                  <span>Guest Favorite</span>
-                </div>
+          <!-- Quick Category Pills -->
+          <div class="hero-categories-pills">
+            <span class="pills-label d-none d-md-inline">Popular:</span>
+            <a href="/campgrounds" class="category-pill-item"><i class="bi bi-tree"></i> National Parks</a>
+            <a href="/campgrounds" class="category-pill-item"><i class="bi bi-houses"></i> Cabins</a>
+            <a href="/campgrounds" class="category-pill-item"><i class="bi bi-water"></i> Lakefront</a>
+            <a href="/campgrounds" class="category-pill-item"><i class="bi bi-stars"></i> Stargazing</a>
+            <a href="/campgrounds" class="category-pill-item"><i class="bi bi-fire"></i> Trending</a>
+            <a href="/campgrounds" class="category-pill-item"><i class="bi bi-heart"></i> Pet Friendly</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trust Badges Bar -->
+      <section class="trust-features-bar mb-5">
+        <div class="row g-4 text-center text-md-start">
+          <div class="col-md-4">
+            <div class="d-flex align-items-center gap-3 justify-content-center justify-content-md-start">
+              <div class="trust-icon-box">
+                <i class="bi bi-shield-check text-danger fs-3"></i>
               </div>
-              <div class="hero-img-side">
-                <img src="/images/hero-photo.png" alt="Lakeside campsite" class="hero-img-top">
-                <img src="/images/hero-photo.png" alt="Mountain camp" class="hero-img-bottom">
+              <div>
+                <h6 class="fw-bold mb-1">YelpCamp AirCover</h6>
+                <p class="text-secondary small mb-0">Complete booking protection on every campsite reservation.</p>
               </div>
             </div>
           </div>
-        </section>
-
-        <!-- Section 1: Inspiration for your next camping trip -->
-        <section class="py-4 mb-5">
-          <div class="d-flex align-items-center justify-content-between mb-4">
-            <div>
-              <h3 class="fw-bold mb-1">Inspiration for your next camping trip</h3>
-              <p class="text-secondary small mb-0">Popular national parks and wilderness destinations</p>
-            </div>
-            <a href="/campgrounds"
-              class="text-dark fw-bold small text-decoration-underline d-none d-md-inline-block">Explore all</a>
-          </div>
-
-          <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3">
-            <!-- Card 1: Yosemite -->
-            <div class="col">
-              <a href="/campgrounds" class="destination-card h-100">
-                <img src="/images/yosemite.avif" alt="Yosemite">
-                <div class="destination-card-body">
-                  <h6>Yosemite Valley</h6>
-                  <p>California &bull; 140 miles away</p>
-                </div>
-              </a>
-            </div>
-
-            <!-- Card 2: Zion -->
-            <div class="col">
-              <a href="/campgrounds" class="destination-card h-100">
-                <img src="/images/zion.avif" alt="Zion">
-                <div class="destination-card-body">
-                  <h6>Zion Canyon</h6>
-                  <p>Utah &bull; 210 miles away</p>
-                </div>
-              </a>
-            </div>
-
-            <!-- Card 3: Grand Canyon -->
-            <div class="col">
-              <a href="/campgrounds" class="destination-card h-100">
-                <img src="/images/grand.avif" alt="Grand Canyon">
-                <div class="destination-card-body">
-                  <h6>Grand Canyon</h6>
-                  <p>Arizona &bull; 320 miles away</p>
-                </div>
-              </a>
-            </div>
-
-            <!-- Card 4: Glacier -->
-            <div class="col">
-              <a href="/campgrounds" class="destination-card h-100">
-                <img src="/images/glacier.avif" alt="Glacier">
-                <div class="destination-card-body">
-                  <h6>Glacier National Park</h6>
-                  <p>Montana &bull; 450 miles away</p>
-                </div>
-              </a>
-            </div>
-
-            <!-- Card 5: Smoky Mountains -->
-            <div class="col">
-              <a href="/campgrounds" class="destination-card h-100">
-                <img src="/images/smoky-mountains.avif" alt="Smoky Mountains">
-                <div class="destination-card-body">
-                  <h6>Smoky Mountains</h6>
-                  <p>Tennessee &bull; 180 miles away</p>
-                </div>
-              </a>
-            </div>
-
-            <!-- Card 6: Joshua Tree -->
-            <div class="col">
-              <a href="/campgrounds" class="destination-card h-100">
-                <img src="/images/joshua-tree.avif" alt="Joshua Tree">
-                <div class="destination-card-body">
-                  <h6>Joshua Tree</h6>
-                  <p>California &bull; 95 miles away</p>
-                </div>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <!-- Section 2: Discover YelpCamp Experiences -->
-        <section class="py-4 mb-5">
-          <h3 class="fw-bold mb-4">Discover YelpCamp Experiences</h3>
-          <div class="row g-4">
-            <div class="col-md-4">
-              <a href="/campgrounds" class="experience-card">
-                <img src="/images/backpacking.avif" alt="Backpacking">
-                <div class="experience-card-overlay"></div>
-                <div class="experience-card-content">
-                  <h4>Backpacking Trails</h4>
-                  <p>Trek through scenic alpine backcountry and sleep under the stars.</p>
-                  <span class="experience-card-btn">Explore trails</span>
-                </div>
-              </a>
-            </div>
-
-            <div class="col-md-4">
-              <a href="/campgrounds" class="experience-card">
-                <img src="/images/lakefront.avif" alt="Lakefront Kayaking">
-                <div class="experience-card-overlay"></div>
-                <div class="experience-card-content">
-                  <h4>Lakefront Sites</h4>
-                  <p>Waterfront campsites with direct paddle board and kayak access.</p>
-                  <span class="experience-card-btn">Explore lakefront</span>
-                </div>
-              </a>
-            </div>
-
-            <div class="col-md-4">
-              <a href="/campgrounds" class="experience-card">
-                <img src="/images/darksky.avif" alt="Stargazing">
-                <div class="experience-card-overlay"></div>
-                <div class="experience-card-content">
-                  <h4>Dark Sky Reserves</h4>
-                  <p>Certified dark-sky campgrounds with unobstructed Milky Way views.</p>
-                  <span class="experience-card-btn">Explore stargazing</span>
-                </div>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <!-- Section 3: Airbnb Host Earnings Banner -->
-        <section class="airbnb-host-banner">
-          <div class="row align-items-center">
-            <div class="col-lg-8">
-              <h2>YelpCamp your campsite.</h2>
-              <p class="my-3">You could earn <strong class="text-white">$1,420 / 7 nights</strong> hosting your land or
-                campsite on YelpCamp.</p>
-              <div class="d-flex flex-wrap gap-3 mt-4">
-                <a href="/campgrounds/new" class="airbnb-host-white-btn">
-                  <i class="bi bi-house-door-fill text-danger"></i> YelpCamp Setup
-                </a>
-                <a href="/campgrounds" class="btn btn-outline-light rounded-2 px-4 py-3 fw-bold">
-                  Learn more
-                </a>
+          <div class="col-md-4">
+            <div class="d-flex align-items-center gap-3 justify-content-center justify-content-md-start">
+              <div class="trust-icon-box">
+                <i class="bi bi-geo-alt text-danger fs-3"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1">Interactive Geocoding</h6>
+                <p class="text-secondary small mb-0">Precise location pins powered by MapTiler SDK navigation.</p>
               </div>
             </div>
-            <div class="col-lg-4 text-end d-none d-lg-block">
-              <i class="bi bi-compass text-white opacity-75" style="font-size: 8rem;"></i>
+          </div>
+          <div class="col-md-4">
+            <div class="d-flex align-items-center gap-3 justify-content-center justify-content-md-start">
+              <div class="trust-icon-box">
+                <i class="bi bi-person-heart text-danger fs-3"></i>
+              </div>
+              <div>
+                <h6 class="fw-bold mb-1">Community Reviews</h6>
+                <p class="text-secondary small mb-0">Authentic 1-to-5 star ratings and tips from verified campers.</p>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-      </div>
-    </main>
+      <!-- Section 1: Popular Destinations -->
+      <section class="py-3 mb-5">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div>
+            <h3 class="fw-bold mb-1">Inspiration for your next camping trip</h3>
+            <p class="text-secondary small mb-0">Popular national parks and wilderness destinations</p>
+          </div>
+          <a href="/campgrounds" class="text-dark fw-bold small text-decoration-underline d-none d-md-inline-block">
+            Explore all campgrounds &rarr;
+          </a>
+        </div>
 
-    <!-- Airbnb Footer -->
-    <%- include('./partials/footer') %>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3">
+          <!-- Card 1: Yosemite -->
+          <div class="col">
+            <a href="/campgrounds" class="destination-card h-100">
+              <img src="/images/yosemite.avif" alt="Yosemite">
+              <div class="destination-card-body">
+                <h6>Yosemite Valley</h6>
+                <p>California &bull; 140 miles away</p>
+              </div>
+            </a>
+          </div>
 
-      <!-- Bootstrap JS -->
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
-        integrity="sha384-7qAoOXltbVP82dhxHAUje59V5r2YsVfBafyUDxEdApLPmcdhBPg1DKg1ERo0BZlK"
-        crossorigin="anonymous"></script>
+          <!-- Card 2: Zion -->
+          <div class="col">
+            <a href="/campgrounds" class="destination-card h-100">
+              <img src="/images/zion.avif" alt="Zion">
+              <div class="destination-card-body">
+                <h6>Zion Canyon</h6>
+                <p>Utah &bull; 210 miles away</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 3: Grand Canyon -->
+          <div class="col">
+            <a href="/campgrounds" class="destination-card h-100">
+              <img src="/images/grand.avif" alt="Grand Canyon">
+              <div class="destination-card-body">
+                <h6>Grand Canyon</h6>
+                <p>Arizona &bull; 320 miles away</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 4: Glacier -->
+          <div class="col">
+            <a href="/campgrounds" class="destination-card h-100">
+              <img src="/images/glacier.avif" alt="Glacier">
+              <div class="destination-card-body">
+                <h6>Glacier National Park</h6>
+                <p>Montana &bull; 450 miles away</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 5: Smoky Mountains -->
+          <div class="col">
+            <a href="/campgrounds" class="destination-card h-100">
+              <img src="/images/smoky-mountains.avif" alt="Smoky Mountains">
+              <div class="destination-card-body">
+                <h6>Smoky Mountains</h6>
+                <p>Tennessee &bull; 180 miles away</p>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 6: Joshua Tree -->
+          <div class="col">
+            <a href="/campgrounds" class="destination-card h-100">
+              <img src="/images/joshua-tree.avif" alt="Joshua Tree">
+              <div class="destination-card-body">
+                <h6>Joshua Tree</h6>
+                <p>California &bull; 95 miles away</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Discover YelpCamp Experiences -->
+      <section class="py-3 mb-5">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div>
+            <h3 class="fw-bold mb-1">Discover YelpCamp Experiences</h3>
+            <p class="text-secondary small mb-0">Immerse yourself in nature activities and outdoor stays</p>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <a href="/campgrounds" class="experience-card">
+              <img src="/images/backpacking.avif" alt="Backpacking">
+              <div class="experience-card-overlay"></div>
+              <div class="experience-card-content">
+                <h4>Backpacking Trails</h4>
+                <p>Trek through scenic alpine backcountry and sleep under the stars.</p>
+                <span class="experience-card-btn">Explore trails</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-4">
+            <a href="/campgrounds" class="experience-card">
+              <img src="/images/lakefront.avif" alt="Lakefront Kayaking">
+              <div class="experience-card-overlay"></div>
+              <div class="experience-card-content">
+                <h4>Lakefront Sites</h4>
+                <p>Waterfront campsites with direct paddle board and kayak access.</p>
+                <span class="experience-card-btn">Explore lakefront</span>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-4">
+            <a href="/campgrounds" class="experience-card">
+              <img src="/images/darksky.avif" alt="Stargazing">
+              <div class="experience-card-overlay"></div>
+              <div class="experience-card-content">
+                <h4>Dark Sky Reserves</h4>
+                <p>Certified dark-sky campgrounds with unobstructed Milky Way views.</p>
+                <span class="experience-card-btn">Explore stargazing</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Airbnb Host Earnings Banner -->
+      <section class="airbnb-host-banner">
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <h2>YelpCamp your campsite.</h2>
+            <p class="my-3">
+              You could earn <strong class="text-white">$1,420 / 7 nights</strong> hosting your land, cabin, or campsite on YelpCamp.
+            </p>
+            <div class="d-flex flex-wrap gap-3 mt-4">
+              <a href="/campgrounds/new" class="airbnb-host-white-btn">
+                <i class="bi bi-house-door-fill text-danger"></i> YelpCamp Setup
+              </a>
+              <a href="/hosting" class="btn btn-outline-light rounded-2 px-4 py-3 fw-bold">
+                Learn more
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-4 text-end d-none d-lg-block">
+            <i class="bi bi-compass text-white opacity-75" style="font-size: 8rem;"></i>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Airbnb Footer -->
+  <%- include('./partials/footer') %>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
+    integrity="sha384-7qAoOXltbVP82dhxHAUje59V5r2YsVfBafyUDxEdApLPmcdhBPg1DKg1ERo0BZlK"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -22,8 +22,7 @@ const LocalStrategy = require("passport-local");
 const user = require("./models/user");
 
 const mongoSanitize = require("express-mongo-sanitize");
-const db_Url = process.env.DB_URL;
-// "mongodb://localhost:27017/yelpcamp"
+const db_Url = process.env.DB_URL || "mongodb://127.0.0.1:27017/yelpcamp";
 
 const { MongoStore } = require("connect-mongo");
 
@@ -39,6 +38,10 @@ app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
+}
+
 app.use(express.urlencoded({ extended: true }));
 app.use(methodoverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
@@ -48,8 +51,8 @@ const store = MongoStore.create({
   mongoUrl: db_Url,
   touchAfter: 24 * 60 * 60,
   crypto: {
-    secret: process.env.SESSION_SECRET || 'thisshouldbeabettersecret!'
-  }
+    secret: process.env.SESSION_SECRET || "thisshouldbeabettersecret!",
+  },
 });
 
 store.on("error", function (e) {
@@ -59,16 +62,16 @@ store.on("error", function (e) {
 const sessionConfig = {
   store,
   name: "session",
-  secret: process.env.SESSION_SECRET || 'fallback',
+  secret: process.env.SESSION_SECRET || "thisshouldbeabettersecret!",
   resave: false,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
 };
-
 
 app.use(session(sessionConfig));
 app.use(flash());
@@ -108,7 +111,7 @@ app.use(
           "'self'",
           "blob:",
           "data:",
-          "https://res.cloudinary.com/dr0gqzvmz/",
+          "https://res.cloudinary.com/",
           "https://api.maptiler.com/",
         ],
       },
@@ -123,11 +126,13 @@ passport.use(new LocalStrategy(user.authenticate()));
 passport.serializeUser(user.serializeUser());
 passport.deserializeUser(user.deserializeUser());
 
-app.use("/fakeuser", async (req, res) => {
-  const User = new user({ email: "paul@gmail.com", username: "paul" });
-  const newUser = await user.register(User, "chicken");
-  res.send(newUser);
-});
+if (process.env.NODE_ENV !== "production") {
+  app.use("/fakeuser", async (req, res) => {
+    const User = new user({ email: "paul@gmail.com", username: "paul" });
+    const newUser = await user.register(User, "chicken");
+    res.send(newUser);
+  });
+}
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.user || null;
@@ -185,3 +190,5 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+module.exports = app;
