@@ -1,388 +1,430 @@
 <% layout('layout/boilerplate') %>
 
-<!-- Airbnb Sticky Category Bar with Filters & Total Switch -->
-<div class="airbnb-categories-bar">
-  <div class="airbnb-categories-wrapper">
-    <!-- Category Tabs -->
-    <div class="airbnb-categories-container" id="categoryTabs">
-      <div class="category-tab active" data-category="all">
-        <i class="bi bi-fire"></i>
-        <span>Trending</span>
-      </div>
-      <div class="category-tab" data-category="national-parks">
-        <i class="bi bi-tree"></i>
-        <span>National Parks</span>
-      </div>
-      <div class="category-tab" data-category="cabins">
-        <i class="bi bi-houses"></i>
-        <span>Cabins</span>
-      </div>
-      <div class="category-tab" data-category="lakeside">
-        <i class="bi bi-water"></i>
-        <span>Lakefront</span>
-      </div>
-      <div class="category-tab" data-category="mountains">
-        <i class="bi bi-triangle"></i>
-        <span>Amazing Views</span>
-      </div>
-      <div class="category-tab" data-category="offgrid">
-        <i class="bi bi-compass"></i>
-        <span>Off-the-grid</span>
-      </div>
-      <div class="category-tab" data-category="beaches">
-        <i class="bi bi-tsunami"></i>
-        <span>Beachfront</span>
-      </div>
-      <div class="category-tab" data-category="stargazing">
-        <i class="bi bi-stars"></i>
-        <span>Stargazing</span>
-      </div>
-      <div class="category-tab" data-category="pets">
-        <i class="bi bi-heart"></i>
-        <span>Pet Friendly</span>
-      </div>
-    </div>
-
-    <!-- Filter & Total Display Controls (Airbnb Signature) -->
-    <div class="airbnb-bar-controls d-none d-md-flex">
-      <!-- Filter Trigger Button -->
-      <button class="airbnb-filter-trigger-btn" type="button" data-bs-toggle="modal" data-bs-target="#airbnbFilterModal">
-        <i class="bi bi-sliders"></i>
-        <span>Filters</span>
-      </button>
-
-      <!-- Display Total Switch -->
-      <label class="airbnb-tax-toggle-box" for="taxToggleSwitch">
-        <span>Display total before taxes</span>
-        <div class="form-check form-switch mb-0">
-          <input class="form-check-input cursor-pointer" type="checkbox" role="switch" id="taxToggleSwitch">
+  <!-- Airbnb Sticky Category Bar with Filters & Total Switch -->
+  <div class="airbnb-categories-bar">
+    <div class="airbnb-categories-wrapper">
+      <!-- Category Tabs -->
+      <div class="airbnb-categories-container" id="categoryTabs">
+        <div class="category-tab active" data-category="all">
+          <i class="bi bi-fire"></i>
+          <span>Trending</span>
         </div>
-      </label>
+        <div class="category-tab" data-category="national-parks">
+          <i class="bi bi-tree"></i>
+          <span>National Parks</span>
+        </div>
+        <div class="category-tab" data-category="cabins">
+          <i class="bi bi-houses"></i>
+          <span>Cabins</span>
+        </div>
+        <div class="category-tab" data-category="lakeside">
+          <i class="bi bi-water"></i>
+          <span>Lakefront</span>
+        </div>
+        <div class="category-tab" data-category="mountains">
+          <i class="bi bi-triangle"></i>
+          <span>Amazing Views</span>
+        </div>
+        <div class="category-tab" data-category="offgrid">
+          <i class="bi bi-compass"></i>
+          <span>Off-the-grid</span>
+        </div>
+        <div class="category-tab" data-category="beaches">
+          <i class="bi bi-tsunami"></i>
+          <span>Beachfront</span>
+        </div>
+        <div class="category-tab" data-category="stargazing">
+          <i class="bi bi-stars"></i>
+          <span>Stargazing</span>
+        </div>
+        <div class="category-tab" data-category="pets">
+          <i class="bi bi-heart"></i>
+          <span>Pet Friendly</span>
+        </div>
+      </div>
+
+      <!-- Filter & Total Display Controls (Airbnb Signature) -->
+      <div class="airbnb-bar-controls d-none d-md-flex">
+        <!-- Filter Trigger Button -->
+        <button class="airbnb-filter-trigger-btn" type="button" data-bs-toggle="modal"
+          data-bs-target="#airbnbFilterModal">
+          <i class="bi bi-sliders"></i>
+          <span>Filters</span>
+        </button>
+
+        <!-- Display Total Switch -->
+        <label class="airbnb-tax-toggle-box" for="taxToggleSwitch">
+          <span>Display total before taxes</span>
+          <div class="form-check form-switch mb-0">
+            <input class="form-check-input cursor-pointer" type="checkbox" role="switch" id="taxToggleSwitch">
+          </div>
+        </label>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Mobile Filter Button Bar (Small screens) -->
-<div class="d-flex d-md-none align-items-center justify-content-between gap-2 mb-4">
-  <button class="airbnb-filter-trigger-btn flex-grow-1 justify-content-center" type="button" data-bs-toggle="modal" data-bs-target="#airbnbFilterModal">
-    <i class="bi bi-sliders"></i>
-    <span>Filters</span>
+  <!-- Mobile Filter Button Bar (Small screens) -->
+  <div class="d-flex d-md-none align-items-center justify-content-between gap-2 mb-4">
+    <button class="airbnb-filter-trigger-btn flex-grow-1 justify-content-center" type="button" data-bs-toggle="modal"
+      data-bs-target="#airbnbFilterModal">
+      <i class="bi bi-sliders"></i>
+      <span>Filters</span>
+    </button>
+    <label class="airbnb-tax-toggle-box mb-0" for="taxToggleSwitchMobile">
+      <span class="small">Taxes</span>
+      <div class="form-check form-switch mb-0">
+        <input class="form-check-input cursor-pointer" type="checkbox" role="switch" id="taxToggleSwitchMobile">
+      </div>
+    </label>
+  </div>
+
+  <!-- Map Container (Toggled via floating bottom button) -->
+  <div id="mapContainer" class="d-none mb-4 rounded-4 overflow-hidden border shadow-sm position-relative">
+    <div id="map" style="width: 100%; height: 480px;"></div>
+  </div>
+
+  <!-- Campgrounds 4-Column Cards Grid (Airbnb Style) -->
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="campgroundsGrid">
+    <% for (let campground of campgrounds) { %>
+      <div class="col campground-item-col" data-title="<%= campground.title.toLowerCase() %>"
+        data-location="<%= campground.location ? campground.location.toLowerCase() : '' %>"
+        data-description="<%= campground.description ? campground.description.toLowerCase() : '' %>"
+        data-price="<%= campground.price || 0 %>">
+
+        <a href="/campgrounds/<%= campground._id %>" class="airbnb-listing-card">
+          <!-- Image Shell -->
+          <div class="airbnb-card-media">
+            <% if (campground.image && campground.image.length> 0) { %>
+              <img src="<%= campground.image[0].url %>" alt="<%= campground.title %>" loading="lazy">
+              <% } else { %>
+                <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80"
+                  alt="Campsite photo">
+                <% } %>
+
+                  <span class="guest-favorite-badge">Guest favorite</span>
+
+                  <button type="button" class="wishlist-heart" aria-label="Save to wishlist"
+                    onclick="event.preventDefault(); this.classList.toggle('active');">
+                    <i class="bi bi-heart-fill"></i>
+                  </button>
+          </div>
+
+          <!-- Info Block -->
+          <div class="card-title-line">
+            <h6>
+              <%= campground.title %>
+            </h6>
+            <div class="card-rating-tag">
+              <i class="bi bi-star-fill text-dark small"></i>
+              <span>4.9</span>
+            </div>
+          </div>
+
+          <div class="card-subtext">
+            <%= campground.location || 'Scenic Wilderness' %>
+          </div>
+          <div class="card-subtext">Stay available this week</div>
+
+          <div class="card-price-line">
+            <span class="price-night"><strong>$<%= campground.price %></strong> night</span>
+            <span class="price-total text-secondary small d-none">&bull; $<%= (campground.price * 5) + 50 %> total
+                before taxes</span>
+          </div>
+        </a>
+      </div>
+      <% } %>
+  </div>
+
+  <!-- No Results Match State -->
+  <div id="noMatchBox" class="text-center py-5 d-none">
+    <i class="bi bi-tree text-muted fs-1 d-block mb-3"></i>
+    <h4 class="fw-bold mb-2">No campgrounds found in this category</h4>
+    <p class="text-secondary small mb-3">Try choosing another category or clearing your search filters.</p>
+    <button id="clearFiltersBtn" class="btn btn-outline-dark rounded-pill px-4 py-2 small fw-semibold">
+      Show all campgrounds
+    </button>
+  </div>
+
+  <!-- Floating "Show Map" Pill Button (Airbnb Signature) -->
+  <button class="airbnb-map-float-btn" id="floatingMapBtn" type="button">
+    <span id="mapBtnText">Show map</span>
+    <i class="bi bi-map-fill" id="mapBtnIcon"></i>
   </button>
-  <label class="airbnb-tax-toggle-box mb-0" for="taxToggleSwitchMobile">
-    <span class="small">Taxes</span>
-    <div class="form-check form-switch mb-0">
-      <input class="form-check-input cursor-pointer" type="checkbox" role="switch" id="taxToggleSwitchMobile">
-    </div>
-  </label>
-</div>
 
-<!-- Map Container (Toggled via floating bottom button) -->
-<div id="mapContainer" class="d-none mb-4 rounded-4 overflow-hidden border shadow-sm position-relative">
-  <div id="map" style="width: 100%; height: 480px;"></div>
-</div>
+  <!-- Airbnb Interactive Filters Modal -->
+  <div class="modal fade" id="airbnbFilterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content rounded-4 border-0 shadow-lg overflow-hidden">
+        <!-- Modal Header -->
+        <div class="modal-header border-bottom py-3">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 class="modal-title fw-bold fs-6 mx-auto" id="filterModalLabel">Filters</h5>
+          <div style="width: 24px;"></div>
+        </div>
 
-<!-- Campgrounds 4-Column Cards Grid (Airbnb Style) -->
-<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="campgroundsGrid">
-  <% for (let campground of campgrounds) { %>
-    <div class="col campground-item-col"
-         data-title="<%= campground.title.toLowerCase() %>"
-         data-location="<%= campground.location ? campground.location.toLowerCase() : '' %>"
-         data-price="<%= campground.price || 0 %>">
-      
-      <a href="/campgrounds/<%= campground._id %>" class="airbnb-listing-card">
-        <!-- Image Shell -->
-        <div class="airbnb-card-media">
-          <% if (campground.image && campground.image.length > 0) { %>
-            <img src="<%= campground.image[0].url %>" alt="<%= campground.title %>" loading="lazy">
-          <% } else { %>
-            <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=800&q=80" alt="Campsite photo">
-          <% } %>
+        <!-- Modal Body -->
+        <div class="modal-body p-4">
+          <!-- Price Range -->
+          <div class="mb-4 pb-4 border-bottom">
+            <h6 class="fw-bold mb-1">Price range</h6>
+            <p class="text-secondary small mb-3">Nightly prices before taxes and fees</p>
+            <div class="d-flex align-items-center gap-3">
+              <div class="border rounded-3 p-2 flex-grow-1">
+                <label class="d-block text-secondary small fw-bold" style="font-size: 0.65rem;">MINIMUM</label>
+                <div class="d-flex align-items-center">
+                  <span class="text-secondary me-1">$</span>
+                  <input type="number" id="minPriceInput" class="form-control border-0 p-0 shadow-none fw-bold"
+                    placeholder="0" min="0">
+                </div>
+              </div>
+              <span class="text-secondary">&ndash;</span>
+              <div class="border rounded-3 p-2 flex-grow-1">
+                <label class="d-block text-secondary small fw-bold" style="font-size: 0.65rem;">MAXIMUM</label>
+                <div class="d-flex align-items-center">
+                  <span class="text-secondary me-1">$</span>
+                  <input type="number" id="maxPriceInput" class="form-control border-0 p-0 shadow-none fw-bold"
+                    placeholder="500" min="0">
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <span class="guest-favorite-badge">Guest favorite</span>
-          
-          <button type="button" class="wishlist-heart" aria-label="Save to wishlist" onclick="event.preventDefault(); this.classList.toggle('active');">
-            <i class="bi bi-heart-fill"></i>
+          <!-- Type of Place -->
+          <div class="mb-4 pb-4 border-bottom">
+            <h6 class="fw-bold mb-3">Type of campsite</h6>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" id="typeTent" checked>
+              <label class="form-check-label text-dark fw-semibold" for="typeTent">Entire campsite</label>
+              <small class="d-block text-secondary">A dedicated campsite for your own group</small>
+            </div>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" id="typeCabin">
+              <label class="form-check-label text-dark fw-semibold" for="typeCabin">Cabin / Glamping tent</label>
+              <small class="d-block text-secondary">Structured shelter with beds provided</small>
+            </div>
+          </div>
+
+          <!-- Amenities -->
+          <div>
+            <h6 class="fw-bold mb-3">Amenities</h6>
+            <div class="row g-2">
+              <div class="col-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="amenityCampfire">
+                  <label class="form-check-label small fw-semibold" for="amenityCampfire">Campfire pit</label>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="amenityWater">
+                  <label class="form-check-label small fw-semibold" for="amenityWater">Drinking water</label>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="amenityPets">
+                  <label class="form-check-label small fw-semibold" for="amenityPets">Pet friendly</label>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="amenityParking">
+                  <label class="form-check-label small fw-semibold" for="amenityParking">Free parking</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer border-top d-flex align-items-center justify-content-between p-3">
+          <button type="button" class="btn btn-link text-dark fw-bold text-decoration-underline p-0 small"
+            id="resetModalFilters">
+            Clear all
+          </button>
+          <button type="button" class="btn btn-dark rounded-3 px-4 py-2 fw-bold small" data-bs-dismiss="modal"
+            id="applyModalFilters">
+            Show campgrounds
           </button>
         </div>
-
-        <!-- Info Block -->
-        <div class="card-title-line">
-          <h6><%= campground.title %></h6>
-          <div class="card-rating-tag">
-            <i class="bi bi-star-fill text-dark small"></i>
-            <span>4.9</span>
-          </div>
-        </div>
-
-        <div class="card-subtext"><%= campground.location || 'Scenic Wilderness' %></div>
-        <div class="card-subtext">Stay available this week</div>
-
-        <div class="card-price-line">
-          <span class="price-night"><strong>$<%= campground.price %></strong> night</span>
-          <span class="price-total text-secondary small d-none">&bull; $<%= (campground.price * 5) + 50 %> total before taxes</span>
-        </div>
-      </a>
-    </div>
-  <% } %>
-</div>
-
-<!-- No Results Match State -->
-<div id="noMatchBox" class="text-center py-5 d-none">
-  <i class="bi bi-tree text-muted fs-1 d-block mb-3"></i>
-  <h4 class="fw-bold mb-2">No campgrounds found</h4>
-  <p class="text-secondary small mb-3">Try changing or clearing some of your filters.</p>
-  <button id="clearFiltersBtn" class="btn btn-outline-dark rounded-pill px-4 py-2 small fw-semibold">
-    Clear all filters
-  </button>
-</div>
-
-<!-- Floating "Show Map" Pill Button (Airbnb Signature) -->
-<button class="airbnb-map-float-btn" id="floatingMapBtn" type="button">
-  <span id="mapBtnText">Show map</span>
-  <i class="bi bi-map-fill" id="mapBtnIcon"></i>
-</button>
-
-<!-- Airbnb Interactive Filters Modal -->
-<div class="modal fade" id="airbnbFilterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content rounded-4 border-0 shadow-lg overflow-hidden">
-      <!-- Modal Header -->
-      <div class="modal-header border-bottom py-3">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        <h5 class="modal-title fw-bold fs-6 mx-auto" id="filterModalLabel">Filters</h5>
-        <div style="width: 24px;"></div>
-      </div>
-
-      <!-- Modal Body -->
-      <div class="modal-body p-4">
-        <!-- Price Range -->
-        <div class="mb-4 pb-4 border-bottom">
-          <h6 class="fw-bold mb-1">Price range</h6>
-          <p class="text-secondary small mb-3">Nightly prices before taxes and fees</p>
-          <div class="d-flex align-items-center gap-3">
-            <div class="border rounded-3 p-2 flex-grow-1">
-              <label class="d-block text-secondary small fw-bold" style="font-size: 0.65rem;">MINIMUM</label>
-              <div class="d-flex align-items-center">
-                <span class="text-secondary me-1">$</span>
-                <input type="number" id="minPriceInput" class="form-control border-0 p-0 shadow-none fw-bold" placeholder="0" min="0">
-              </div>
-            </div>
-            <span class="text-secondary">&ndash;</span>
-            <div class="border rounded-3 p-2 flex-grow-1">
-              <label class="d-block text-secondary small fw-bold" style="font-size: 0.65rem;">MAXIMUM</label>
-              <div class="d-flex align-items-center">
-                <span class="text-secondary me-1">$</span>
-                <input type="number" id="maxPriceInput" class="form-control border-0 p-0 shadow-none fw-bold" placeholder="500" min="0">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Type of Place -->
-        <div class="mb-4 pb-4 border-bottom">
-          <h6 class="fw-bold mb-3">Type of campsite</h6>
-          <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox" id="typeTent" checked>
-            <label class="form-check-label text-dark fw-semibold" for="typeTent">Entire campsite</label>
-            <small class="d-block text-secondary">A dedicated campsite for your own group</small>
-          </div>
-          <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox" id="typeCabin">
-            <label class="form-check-label text-dark fw-semibold" for="typeCabin">Cabin / Glamping tent</label>
-            <small class="d-block text-secondary">Structured shelter with beds provided</small>
-          </div>
-        </div>
-
-        <!-- Amenities -->
-        <div>
-          <h6 class="fw-bold mb-3">Amenities</h6>
-          <div class="row g-2">
-            <div class="col-6">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="amenityCampfire">
-                <label class="form-check-label small fw-semibold" for="amenityCampfire">Campfire pit</label>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="amenityWater">
-                <label class="form-check-label small fw-semibold" for="amenityWater">Drinking water</label>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="amenityPets">
-                <label class="form-check-label small fw-semibold" for="amenityPets">Pet friendly</label>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="amenityParking">
-                <label class="form-check-label small fw-semibold" for="amenityParking">Free parking</label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Modal Footer -->
-      <div class="modal-footer border-top d-flex align-items-center justify-content-between p-3">
-        <button type="button" class="btn btn-link text-dark fw-bold text-decoration-underline p-0 small" id="resetModalFilters">
-          Clear all
-        </button>
-        <button type="button" class="btn btn-dark rounded-3 px-4 py-2 fw-bold small" data-bs-dismiss="modal" id="applyModalFilters">
-          Show campgrounds
-        </button>
       </div>
     </div>
   </div>
-</div>
 
-<!-- MapTiler Script Initialization -->
-<%- "<script>" %>
-  const maptilerApiKey = "<%- process.env.MAPTILER_API_KEY %>";
-  const campgrounds = {
-    type: "FeatureCollection",
-    features: <%- JSON.stringify(campgrounds.map(campground => ({
-      type: "Feature",
-      geometry: campground.geometry,
-      properties: { popUpMarkup: campground?.properties?.popUpMarkup }
-    }))) %>
-  };
-<%- "</script>" %>
+  <!-- MapTiler Script Initialization -->
+  <%- "<script>" %>
+    const maptilerApiKey = "<%- process.env.MAPTILER_API_KEY %>";
+      const campgrounds = {
+      type: "FeatureCollection",
+      features: <%- JSON.stringify(campgrounds.map(campground=> ({
+        type: "Feature",
+        geometry: campground.geometry,
+        properties: { popUpMarkup: campground?.properties?.popUpMarkup }
+        }))) %>
+        };
+        <%- "</script>" %>
 
-<script src="/javascripts/clusterMap.js"></script>
+          <script src="/javascripts/clusterMap.js"></script>
 
-<!-- Airbnb Interactive Controls & Filter Script -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const categoryTabs = document.querySelectorAll('.category-tab');
-    const cards = Array.from(document.querySelectorAll('.campground-item-col'));
-    const noMatchBox = document.getElementById('noMatchBox');
-    const clearBtn = document.getElementById('clearFiltersBtn');
-    const floatingMapBtn = document.getElementById('floatingMapBtn');
-    const mapContainer = document.getElementById('mapContainer');
-    const mapBtnText = document.getElementById('mapBtnText');
-    const mapBtnIcon = document.getElementById('mapBtnIcon');
-    
-    // Tax switch toggles
-    const taxToggle = document.getElementById('taxToggleSwitch');
-    const taxToggleMobile = document.getElementById('taxToggleSwitchMobile');
-    const totalPrices = document.querySelectorAll('.price-total');
+          <!-- Airbnb Interactive Category Filtering & Controls Script -->
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              const categoryTabs = document.querySelectorAll('.category-tab');
+              const cards = Array.from(document.querySelectorAll('.campground-item-col'));
+              const noMatchBox = document.getElementById('noMatchBox');
+              const clearBtn = document.getElementById('clearFiltersBtn');
+              const floatingMapBtn = document.getElementById('floatingMapBtn');
+              const mapContainer = document.getElementById('mapContainer');
+              const mapBtnText = document.getElementById('mapBtnText');
+              const mapBtnIcon = document.getElementById('mapBtnIcon');
 
-    // Filter modal inputs
-    const minPriceInput = document.getElementById('minPriceInput');
-    const maxPriceInput = document.getElementById('maxPriceInput');
-    const applyModalBtn = document.getElementById('applyModalFilters');
-    const resetModalBtn = document.getElementById('resetModalFilters');
+              // Tax switch toggles
+              const taxToggle = document.getElementById('taxToggleSwitch');
+              const taxToggleMobile = document.getElementById('taxToggleSwitchMobile');
+              const totalPrices = document.querySelectorAll('.price-total');
 
-    let isMapVisible = false;
-    let minPrice = null;
-    let maxPrice = null;
+              // Filter modal inputs
+              const minPriceInput = document.getElementById('minPriceInput');
+              const maxPriceInput = document.getElementById('maxPriceInput');
+              const applyModalBtn = document.getElementById('applyModalFilters');
+              const resetModalBtn = document.getElementById('resetModalFilters');
 
-    // Toggle Map
-    floatingMapBtn.addEventListener('click', function() {
-      isMapVisible = !isMapVisible;
-      if (isMapVisible) {
-        mapContainer.classList.remove('d-none');
-        mapBtnText.textContent = 'Show list';
-        mapBtnIcon.className = 'bi bi-list-ul';
-        if (typeof map !== 'undefined' && map.resize) {
-          map.resize();
-        }
-        mapContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        mapContainer.classList.add('d-none');
-        mapBtnText.textContent = 'Show map';
-        mapBtnIcon.className = 'bi bi-map-fill';
-      }
-    });
+              let isMapVisible = false;
+              let activeCategory = 'all';
+              let minPrice = null;
+              let maxPrice = null;
 
-    // Toggle Total before taxes display
-    function handleTaxToggle(checked) {
-      if (taxToggle) taxToggle.checked = checked;
-      if (taxToggleMobile) taxToggleMobile.checked = checked;
-      totalPrices.forEach(el => {
-        el.classList.toggle('d-none', !checked);
-      });
-    }
+              // Category Keyword Dictionary
+              const categoryKeywords = {
+                'all': [],
+                'national-parks': ['national', 'park', 'forest', 'canyon', 'valley', 'preserve', 'trail', 'reserve', 'mount', 'mountain', 'state'],
+                'cabins': ['cabin', 'glamping', 'shelter', 'lodge', 'yurt', 'hut', 'chalet', 'camp', 'retreat'],
+                'lakeside': ['lake', 'river', 'creek', 'water', 'waterfront', 'pond', 'kayak', 'paddle', 'dock', 'beach', 'bay', 'stream'],
+                'mountains': ['mountain', 'peak', 'ridge', 'view', 'scenic', 'alpine', 'cliff', 'overlook', 'hill', 'highland', 'rock', 'summit'],
+                'offgrid': ['offgrid', 'off-grid', 'remote', 'primitive', 'wilderness', 'quiet', 'solitude', 'secluded', 'backcountry', 'hidden', 'wood'],
+                'beaches': ['beach', 'coast', 'coastal', 'ocean', 'sea', 'sand', 'shore', 'bay', 'dune', 'island', 'tide'],
+                'stargazing': ['star', 'stargazing', 'sky', 'dark', 'night', 'astronomy', 'milky', 'clear', 'open', 'desert'],
+                'pets': ['pet', 'dog', 'animal', 'friendly', 'leash', 'bring', 'camp', 'wood', 'park']
+              };
 
-    if (taxToggle) {
-      taxToggle.addEventListener('change', function() {
-        handleTaxToggle(this.checked);
-      });
-    }
-    if (taxToggleMobile) {
-      taxToggleMobile.addEventListener('change', function() {
-        handleTaxToggle(this.checked);
-      });
-    }
+              // Toggle Map
+              floatingMapBtn.addEventListener('click', function () {
+                isMapVisible = !isMapVisible;
+                if (isMapVisible) {
+                  mapContainer.classList.remove('d-none');
+                  mapBtnText.textContent = 'Show list';
+                  mapBtnIcon.className = 'bi bi-list-ul';
+                  if (typeof map !== 'undefined' && map.resize) {
+                    map.resize();
+                  }
+                  mapContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                  mapContainer.classList.add('d-none');
+                  mapBtnText.textContent = 'Show map';
+                  mapBtnIcon.className = 'bi bi-map-fill';
+                }
+              });
 
-    // Filter Cards Logic
-    function filterCards() {
-      let visible = 0;
-      cards.forEach(card => {
-        const price = parseFloat(card.getAttribute('data-price')) || 0;
-        let matchPrice = true;
-        if (minPrice !== null && price < minPrice) matchPrice = false;
-        if (maxPrice !== null && price > maxPrice) matchPrice = false;
+              // Toggle Total before taxes display
+              function handleTaxToggle(checked) {
+                if (taxToggle) taxToggle.checked = checked;
+                if (taxToggleMobile) taxToggleMobile.checked = checked;
+                totalPrices.forEach(el => {
+                  el.classList.toggle('d-none', !checked);
+                });
+              }
 
-        if (matchPrice) {
-          card.classList.remove('d-none');
-          visible++;
-        } else {
-          card.classList.add('d-none');
-        }
-      });
+              if (taxToggle) {
+                taxToggle.addEventListener('change', function () {
+                  handleTaxToggle(this.checked);
+                });
+              }
+              if (taxToggleMobile) {
+                taxToggleMobile.addEventListener('change', function () {
+                  handleTaxToggle(this.checked);
+                });
+              }
 
-      if (noMatchBox) {
-        noMatchBox.classList.toggle('d-none', visible > 0);
-      }
-    }
+              // Filter Cards Logic
+              function filterCards() {
+                let visible = 0;
+                const keywords = categoryKeywords[activeCategory] || [];
 
-    // Category Tabs click
-    categoryTabs.forEach(tab => {
-      tab.addEventListener('click', function() {
-        categoryTabs.forEach(t => t.classList.remove('active'));
-        this.classList.add('active');
-        // Filter or reset cards
-        filterCards();
-      });
-    });
+                cards.forEach(card => {
+                  const title = card.getAttribute('data-title') || '';
+                  const loc = card.getAttribute('data-location') || '';
+                  const desc = card.getAttribute('data-description') || '';
+                  const combinedText = `${title} ${loc} ${desc}`;
+                  const price = parseFloat(card.getAttribute('data-price')) || 0;
 
-    // Apply Modal Filters
-    if (applyModalBtn) {
-      applyModalBtn.addEventListener('click', function() {
-        minPrice = minPriceInput.value ? parseFloat(minPriceInput.value) : null;
-        maxPrice = maxPriceInput.value ? parseFloat(maxPriceInput.value) : null;
-        filterCards();
-      });
-    }
+                  // Check Category Match
+                  let matchCategory = true;
+                  if (activeCategory !== 'all' && keywords.length > 0) {
+                    matchCategory = keywords.some(kw => combinedText.includes(kw));
+                  }
 
-    // Reset Modal Filters
-    if (resetModalBtn) {
-      resetModalBtn.addEventListener('click', function() {
-        minPriceInput.value = '';
-        maxPriceInput.value = '';
-        minPrice = null;
-        maxPrice = null;
-        filterCards();
-      });
-    }
+                  // Check Price Range Match
+                  let matchPrice = true;
+                  if (minPrice !== null && price < minPrice) matchPrice = false;
+                  if (maxPrice !== null && price > maxPrice) matchPrice = false;
 
-    // Reset from no match box
-    if (clearBtn) {
-      clearBtn.addEventListener('click', function() {
-        if (minPriceInput) minPriceInput.value = '';
-        if (maxPriceInput) maxPriceInput.value = '';
-        minPrice = null;
-        maxPrice = null;
-        categoryTabs.forEach((t, i) => {
-          if (i === 0) t.classList.add('active');
-          else t.classList.remove('active');
-        });
-        filterCards();
-      });
-    }
-  });
-</script>
+                  if (matchCategory && matchPrice) {
+                    card.classList.remove('d-none');
+                    visible++;
+                  } else {
+                    card.classList.add('d-none');
+                  }
+                });
+
+                if (noMatchBox) {
+                  noMatchBox.classList.toggle('d-none', visible > 0);
+                }
+              }
+
+              // Category Tabs click event
+              categoryTabs.forEach(tab => {
+                tab.addEventListener('click', function () {
+                  categoryTabs.forEach(t => t.classList.remove('active'));
+                  this.classList.add('active');
+                  activeCategory = this.getAttribute('data-category') || 'all';
+                  filterCards();
+                });
+              });
+
+              // Apply Modal Filters
+              if (applyModalBtn) {
+                applyModalBtn.addEventListener('click', function () {
+                  minPrice = minPriceInput.value ? parseFloat(minPriceInput.value) : null;
+                  maxPrice = maxPriceInput.value ? parseFloat(maxPriceInput.value) : null;
+                  filterCards();
+                });
+              }
+
+              // Reset Modal Filters
+              if (resetModalBtn) {
+                resetModalBtn.addEventListener('click', function () {
+                  minPriceInput.value = '';
+                  maxPriceInput.value = '';
+                  minPrice = null;
+                  maxPrice = null;
+                  filterCards();
+                });
+              }
+
+              // Reset from no match box
+              if (clearBtn) {
+                clearBtn.addEventListener('click', function () {
+                  if (minPriceInput) minPriceInput.value = '';
+                  if (maxPriceInput) maxPriceInput.value = '';
+                  minPrice = null;
+                  maxPrice = null;
+                  activeCategory = 'all';
+                  categoryTabs.forEach((t, i) => {
+                    if (i === 0) t.classList.add('active');
+                    else t.classList.remove('active');
+                  });
+                  filterCards();
+                });
+              }
+            });
+          </script>

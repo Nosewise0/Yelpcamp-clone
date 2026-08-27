@@ -9,23 +9,20 @@
 
       <!-- Center Search Capsule (Airbnb Signature) -->
       <a href="/campgrounds" class="airbnb-search-bar d-none d-md-inline-flex text-decoration-none">
-        <span class="search-segment">Anywhere</span>
+        <span class="search-segment">Campgrounds</span>
         <span class="search-divider"></span>
-        <span class="search-segment">Any week</span>
-        <span class="search-divider"></span>
-        <span class="search-segment light">Add guests</span>
-        <span class="search-icon-btn">
-          <i class="bi bi-search"></i>
-        </span>
+        <span class="search-segment">View Campsite</span>
       </a>
+
 
       <!-- Right Nav Actions -->
       <div class="d-flex align-items-center gap-2">
         <a href="/campgrounds/new" class="airbnb-host-btn d-none d-lg-inline-block text-decoration-none">
           YelpCamp your campsite
         </a>
-        
-        <button class="btn btn-link text-dark text-decoration-none p-2 rounded-circle hover-bg d-none d-sm-inline-block" type="button" aria-label="Language & Currency">
+
+        <button class="btn btn-link text-dark text-decoration-none p-2 rounded-circle hover-bg d-none d-sm-inline-block"
+          type="button" aria-label="Language & Currency">
           <i class="bi bi-globe fs-6"></i>
         </button>
 
@@ -37,30 +34,38 @@
               <div class="airbnb-user-avatar bg-dark text-white">
                 <%= currentUser.username.charAt(0).toUpperCase() %>
               </div>
-            <% } else { %>
-              <div class="airbnb-user-avatar bg-secondary text-white">
-                <i class="bi bi-person-fill"></i>
-              </div>
-            <% } %>
+              <% } else { %>
+                <div class="airbnb-user-avatar bg-secondary text-white">
+                  <i class="bi bi-person-fill"></i>
+                </div>
+                <% } %>
           </button>
-          
-          <ul class="dropdown-menu dropdown-menu-end shadow-lg rounded-3 py-2 border-0 mt-2" style="min-width: 240px; font-size: 0.92rem;">
+
+          <ul class="dropdown-menu dropdown-menu-end shadow-lg rounded-3 py-2 border-0 mt-2"
+            style="min-width: 240px; font-size: 0.92rem;">
             <% if (!currentUser) { %>
               <li><a class="dropdown-item fw-bold py-2" href="/register">Sign up</a></li>
               <li><a class="dropdown-item py-2" href="/login">Log in</a></li>
-              <li><hr class="dropdown-divider my-2"></li>
+              <li>
+                <hr class="dropdown-divider my-2">
+              </li>
               <li><a class="dropdown-item py-2" href="/campgrounds">Explore Campgrounds</a></li>
               <li><a class="dropdown-item py-2" href="/campgrounds/new">Host your campsite</a></li>
               <li><a class="dropdown-item py-2" href="#">Help Center</a></li>
-            <% } else { %>
-              <li class="px-3 py-2 text-muted small">Signed in as <strong class="text-dark"><%= currentUser.username %></strong></li>
-              <li><hr class="dropdown-divider my-1"></li>
-              <li><a class="dropdown-item py-2" href="/campgrounds">Explore Campgrounds</a></li>
-              <li><a class="dropdown-item py-2" href="/campgrounds/new">Host your campsite</a></li>
-              <li><a class="dropdown-item py-2" href="#">Wishlists</a></li>
-              <li><hr class="dropdown-divider my-1"></li>
-              <li><a class="dropdown-item py-2 text-danger" href="/logout">Log out</a></li>
-            <% } %>
+              <% } else { %>
+                <li class="px-3 py-2 text-muted small">Signed in as <strong class="text-dark">
+                    <%= currentUser.username %>
+                  </strong></li>
+                <li>
+                  <hr class="dropdown-divider my-1">
+                </li>
+                <li><a class="dropdown-item py-2" href="/campgrounds">Explore Campgrounds</a></li>
+                <li><a class="dropdown-item py-2" href="/campgrounds/new">Host your campsite</a></li>
+                <li>
+                  <hr class="dropdown-divider my-1">
+                </li>
+                <li><a class="dropdown-item py-2 text-danger" href="/logout">Log out</a></li>
+                <% } %>
           </ul>
         </div>
       </div>
