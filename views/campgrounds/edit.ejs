@@ -1,155 +1,163 @@
 <% layout("layout/boilerplate") %>
 
-<div class="container py-5">
-  <div class="row justify-content-center">
-    <!-- Header Section -->
-    <div class="col-lg-8 text-center mb-5">
-      <h1 class="display-4 fw-bold text-primary mb-3">
-        <i class="bi bi-pencil-square"></i> Edit Campground
-      </h1>
-      <p class="lead text-muted">Update the details of your campground</p>
-      <hr class="w-50 mx-auto my-4">
-    </div>
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <!-- Header Section -->
+      <div class="col-lg-8 text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary mb-3">
+          <i class="bi bi-pencil-square"></i> Edit Campground
+        </h1>
+        <p class="lead text-muted">Update the details of your campground</p>
+        <hr class="w-50 mx-auto my-4">
+      </div>
 
-    <!-- Form Card -->
-    <div class="col-lg-7">
-      <div class="card border-0 shadow-lg rounded-4 p-5">
-        <form action="/campgrounds/<%= campground._id%>?_method=PUT" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
-          
-          <!-- Title Field -->
-          <div class="mb-4">
-            <label class="form-label fw-bold mb-2" for="title">
-              <i class="bi bi-chat-left text-primary"></i> Title
-            </label>
-            <input class="form-control form-control-lg rounded-3 border-2" type="text" id="title" name="campground[title]" 
-              placeholder="Campground Title" required value="<%= campground.title %>" />
-            <div class="invalid-feedback">
-              Please provide a title.
-            </div>
-          </div>
+      <!-- Form Card -->
+      <div class="col-lg-7">
+        <div class="card border-0 shadow-lg rounded-4 p-5">
+          <form action="/campgrounds/<%= campground._id%>?_method=PUT" method="POST" novalidate class="needs-validation"
+            enctype="multipart/form-data">
 
-          <!-- Location Field -->
-          <div class="mb-4">
-            <label class="form-label fw-bold mb-2" for="location">
-              <i class="bi bi-geo-alt text-danger"></i> Location
-            </label>
-            <input class="form-control form-control-lg rounded-3 border-2" type="text" id="location" name="campground[location]"
-              placeholder="Campground Location" required value="<%= campground.location %>" />
-            <div class="invalid-feedback">
-              Please provide a location.
-            </div>
-          </div>
-
-          <!-- Price Field -->
-          <div class="mb-4">
-            <label class="form-label fw-bold mb-2" for="price">
-              <i class="bi bi-cash-coin text-success"></i> Price per Night
-            </label>
-            <div class="input-group input-group-lg">
-              <span class="input-group-text bg-success text-white border-0 rounded-start-3" id="price-label">$</span>
-              <input type="text" class="form-control rounded-end-3 border-2" id="price" placeholder="0.00" aria-label="price"
-                aria-describedby="price-label" name="campground[price]" required value="<%= campground.price %>" />
-            </div>
-            <div class="invalid-feedback">
-              Please provide a valid price.
-            </div>
-          </div>
-
-          <!-- Description Field -->
-          <div class="mb-4">
-            <label class="form-label fw-bold mb-2" for="description">
-              <i class="bi bi-justify-left text-info"></i> Description
-            </label>
-            <textarea class="form-control rounded-3 border-2" id="description" name="campground[description]"
-              placeholder="Campground description" rows="5" required><%= campground.description %></textarea>
-            <div class="invalid-feedback">
-              Please provide a description.
-            </div>
-          </div>
-
-          <!-- Image Upload Field -->
-          <div class="mb-5">
-            <label class="form-label fw-bold mb-3" for="image">
-              <i class="bi bi-image text-warning"></i> Add More Images
-            </label>
-            <div class="input-group input-group-lg">
-              <input type="file" class="form-control rounded-start-3 border-2" id="image" name="image" multiple accept="image/*">
-              <label class="input-group-text bg-warning rounded-end-3 border-0 cursor-pointer" for="image">
-                <i class="bi bi-cloud-arrow-up"></i> Choose Files
+            <!-- Title Field -->
+            <div class="mb-4">
+              <label class="form-label fw-bold mb-2" for="title">
+                <i class="bi bi-chat-left text-primary"></i> Title
               </label>
-            </div>
-            <small class="text-muted d-block mt-2">Upload additional images for your campground</small>
-          </div>
-
-          <!-- Current Images Section -->
-          <div class="mb-5">
-            <h5 class="fw-bold mb-4">
-              <i class="bi bi-images text-secondary"></i> Current Images
-            </h5>
-            <% if (campground.image.length === 0) { %>
-              <div class="alert alert-warning rounded-3" role="alert">
-                <i class="bi bi-exclamation-triangle"></i> No images yet. Please add some!
+              <input class="form-control form-control-lg rounded-3 border-2" type="text" id="title"
+                name="campground[title]" placeholder="Campground Title" required value="<%= campground.title %>" />
+              <div class="invalid-feedback">
+                Please provide a title.
               </div>
-            <% } else { %>
-              <div class="row g-3">
-                <% campground.image.forEach(function(img, i){ %>
-                  <div class="col-md-6">
-                    <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
-                      <img src="<%= img.thumbnail %>" class="card-img-top" alt="Campground image" style="height: 200px; object-fit: cover;">
-                      <div class="card-body p-3">
-                        <div class="form-check">
-                          <input class="form-check-input cursor-pointer" type="checkbox" id="image<%= i %>" name="deleteImages[]" value="<%= img.filename %>">
-                          <label class="form-check-label cursor-pointer" for="image<%= i %>">
-                            <span class="text-danger fw-bold">Delete Image?</span>
-                          </label>
+            </div>
+
+            <!-- Location Field -->
+            <div class="mb-4">
+              <label class="form-label fw-bold mb-2" for="location">
+                <i class="bi bi-geo-alt text-danger"></i> Location
+              </label>
+              <input class="form-control form-control-lg rounded-3 border-2" type="text" id="location"
+                name="campground[location]" placeholder="Campground Location" required
+                value="<%= campground.location %>" />
+              <div class="invalid-feedback">
+                Please provide a location.
+              </div>
+            </div>
+
+            <!-- Price Field -->
+            <div class="mb-4">
+              <label class="form-label fw-bold mb-2" for="price">
+                <i class="bi bi-cash-coin text-success"></i> Price per Night
+              </label>
+              <div class="input-group input-group-lg">
+                <span class="input-group-text bg-success text-white border-0 rounded-start-3" id="price-label">$</span>
+                <input type="text" class="form-control rounded-end-3 border-2" id="price" placeholder="0.00"
+                  aria-label="price" aria-describedby="price-label" name="campground[price]" required
+                  value="<%= campground.price %>" />
+              </div>
+              <div class="invalid-feedback">
+                Please provide a valid price.
+              </div>
+            </div>
+
+            <!-- Description Field -->
+            <div class="mb-4">
+              <label class="form-label fw-bold mb-2" for="description">
+                <i class="bi bi-justify-left text-info"></i> Description
+              </label>
+              <textarea class="form-control rounded-3 border-2" id="description" name="campground[description]"
+                placeholder="Campground description" rows="5" required><%= campground.description %></textarea>
+              <div class="invalid-feedback">
+                Please provide a description.
+              </div>
+            </div>
+
+            <!-- Image Upload Field -->
+            <div class="mb-5">
+              <label class="form-label fw-bold mb-3" for="image">
+                <i class="bi bi-image text-warning"></i> Add More Images
+              </label>
+              <div class="input-group input-group-lg">
+                <input type="file" class="form-control rounded-start-3 border-2" id="image" name="image" multiple
+                  accept="image/*">
+                <label class="input-group-text bg-warning rounded-end-3 border-0 cursor-pointer" for="image">
+                  <i class="bi bi-cloud-arrow-up"></i> Choose Files
+                </label>
+              </div>
+              <small class="text-muted d-block mt-2">Upload additional images for your campground</small>
+            </div>
+
+            <!-- Current Images Section -->
+            <div class="mb-5">
+              <h5 class="fw-bold mb-4">
+                <i class="bi bi-images text-secondary"></i> Current Images
+              </h5>
+              <% if (campground.image.length===0) { %>
+                <div class="alert alert-warning rounded-3" role="alert">
+                  <i class="bi bi-exclamation-triangle"></i> No images yet. Please add some!
+                </div>
+                <% } else { %>
+                  <div class="row g-3">
+                    <% campground.image.forEach(function(img, i){ %>
+                      <div class="col-md-6">
+                        <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+                          <img src="<%= img.thumbnail %>" class="card-img-top" alt="Campground image"
+                            style="height: 200px; object-fit: cover;">
+                          <div class="card-body p-3">
+                            <div class="form-check">
+                              <input class="form-check-input cursor-pointer" type="checkbox" id="image<%= i %>"
+                                name="deleteImages[]" value="<%= img.filename %>">
+                              <label class="form-check-label cursor-pointer" for="image<%= i %>">
+                                <span class="text-danger fw-bold">Delete Image?</span>
+                              </label>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                      <% }) %>
                   </div>
-                <% }) %>
-              </div>
-            <% } %>
-          </div>
+                  <% } %>
+            </div>
 
-          <!-- Submit Button -->
-          <div class="d-grid gap-2 mb-3">
-            <button class="btn btn-info btn-lg rounded-pill fw-bold" type="submit">
-              <i class="bi bi-check-circle-fill"></i> Update Campground
-            </button>
-          </div>
+            <!-- Submit Button -->
+            <div class="d-grid gap-2 mb-3">
+              <button class="btn btn-info btn-lg rounded-pill fw-bold" type="submit">
+                <i class="bi bi-check-circle-fill"></i> Update Campground
+              </button>
+            </div>
 
-          <!-- Back Link -->
-          <div class="text-center">
-            <a href="/campgrounds/<%= campground._id %>" class="text-muted text-decoration-none">
-              <i class="bi bi-arrow-left"></i> Back to Campground
-            </a>
-          </div>
-        </form>
+            <!-- Back Link -->
+            <div class="text-center">
+              <a href="/campgrounds/<%= campground._id %>" class="text-muted text-decoration-none">
+                <i class="bi bi-arrow-left"></i> Back to Campground
+              </a>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Custom styles -->
-<style>
-  .cursor-pointer {
-    cursor: pointer;
-  }
-  
-  .form-control-lg, .input-group-lg .form-control, .input-group-lg .input-group-text {
-    padding: 0.75rem 1.25rem;
-    font-size: 1.1rem;
-  }
-  
-  .rounded-3 {
-    border-radius: 0.5rem;
-  }
+  <!-- Custom styles -->
+  <style>
+    .cursor-pointer {
+      cursor: pointer;
+    }
 
-  .rounded-start-3 {
-    border-radius: 0.5rem 0 0 0.5rem;
-  }
+    .form-control-lg,
+    .input-group-lg .form-control,
+    .input-group-lg .input-group-text {
+      padding: 0.75rem 1.25rem;
+      font-size: 1.1rem;
+    }
 
-  .rounded-end-3 {
-    border-radius: 0 0.5rem 0.5rem 0;
-  }
-</style>
+    .rounded-3 {
+      border-radius: 0.5rem;
+    }
+
+    .rounded-start-3 {
+      border-radius: 0.5rem 0 0 0.5rem;
+    }
+
+    .rounded-end-3 {
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+  </style>
